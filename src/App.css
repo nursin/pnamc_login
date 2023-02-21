@@ -1,0 +1,461 @@
+@import url('https://fonts.googleapis.com/css?family=ABeeZee:400,700');
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'ABeeZee', sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  background-color: #ffffff;
+  background-attachment: fixed;
+}
+
+h1,
+h2,
+p,
+li.nav-item,
+a:link,
+a:visited,
+a:active {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+a:hover {
+  color: #fecd02;
+  cursor: pointer;
+}
+
+a:link {
+  font-size: 1.2rem;
+  text-decoration: none;
+  margin-right: 20px;
+}
+
+.round {
+  border-radius: 2rem;
+}
+
+.round-top {
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+}
+
+.round-bottom {
+  border-bottom-left-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+}
+
+.pdf-viewer {
+  width: 100%;
+  min-height: 50rem;
+}
+
+/* navbar */
+nav {
+  background-color: #083d74;
+}
+
+.navbar {
+  display: flex;
+  z-index: 1;
+  transition: 0.5s ease-in;
+  opacity: 1;
+}
+
+.navbar-hide {
+  pointer-events: none;
+  opacity: 0;
+  transition: 0.5s ease-out;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  font-size: 1.2rem;
+  padding-right: 15px;
+  letter-spacing: 1.2px;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+}
+
+img.navbar-logo-left {
+  height: 2.5rem;
+  margin-right: 1rem;
+}
+
+img.navbar-logo-right {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-right: 1rem;
+}
+
+.navbar-logo-expanded {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-right: 1rem;
+  position: absolute;
+  right: 0;
+  bottom: 5px;
+}
+
+.divider {
+  border-left: 1px solid #ffffff;
+  height: 30px;
+  margin-left: 2rem;
+  display: inline-flex;
+}
+
+.navbar__joinNow {
+  background-color: transparent;
+  border-radius: 2rem;
+  border-color: white;
+  color: white;
+}
+
+.navbar__joinNow:hover {
+  background-color: white;
+  color: black;
+}
+
+/* Login Modal, Sign up Modal  */
+.modal-content {
+  border-radius: 2rem;
+}
+
+.navbar__signin {
+  background-color: transparent;
+  border-radius: 2rem;
+  border-color: white;
+  color: white;
+}
+
+.navbar__signin:hover {
+  background-color: white;
+  color: black;
+}
+
+.singin__googleFormButton {
+  background-color: transparent;
+  border-radius: 2rem;
+  border-color: red;
+  color: red !important;
+  width: auto;
+}
+
+.singin__googleFormButton:hover {
+  background-color: red;
+  color: rgb(255, 255, 255) !important;
+  border-color: red;
+}
+
+/* .navbar-toggler {
+  border: 0;
+  outline: 0;
+  outline-style: none;
+  box-shadow: none;
+}
+
+.navbar-toggler:focus {
+  border: 0;
+  outline: 0;
+  outline-style: none;
+  box-shadow: none;
+} */
+
+@media (prefers-reduced-motion: no-preference) {
+  .navbar-logo-right {
+    animation: navbar-logo-right-spin infinite 20s linear;
+  }
+
+  .navbar-logo-expanded {
+    animation: navbar-logo-right-spin infinite 20s linear;
+  }
+}
+
+@keyframes navbar-logo-right-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Dropdown Button */
+.dropbtn {
+  color: #ffffff;
+  font-weight: 700;
+  text-decoration: none;
+  padding-right: 20px;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 220px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 1rem;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 6px 8px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #ddd;
+  border-radius: 1rem;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  /* background-color: #6e2f2f; */
+  color: #fecd02;
+}
+
+/* home page */
+.mycarousel__homePageFirst_images {
+  width: 100vw;
+  max-height: 80vh;
+  min-height: 35vh;
+  object-fit: cover;
+}
+
+.mycarousel__homePageFirst {
+  width: 100vw;
+}
+
+.mycarousel__caption {
+  display: block !important;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.home {
+  min-height: 70vh;
+}
+
+.promo__image {
+  max-height: 40rem;
+  max-width: 100%;
+  border-radius: 2rem;
+}
+
+.promo__video {
+  border-radius: 2rem;
+  overflow: hidden;
+  height: 22.5rem;
+}
+
+.slideShow__images {
+  object-fit: cover;
+  width: 100%;
+  height: 30rem;
+}
+
+/* board of directors */
+
+.boardMemberCard {
+  width: 17rem;
+  border: solid 10px #083d74;
+}
+
+/* News */
+
+.news {
+  min-height: 70vh;
+}
+
+.itemButton__row {
+
+}
+
+.itemButton__row:hover {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  cursor: pointer;
+  border-radius: 0.2rem;
+  background-color: white;
+}
+
+.itemButton__image {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.2rem;
+  object-fit: cover;
+}
+
+.itemButton__row p {
+  font-weight: 300;
+
+}
+
+.news__addNewsBtn {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 2rem;
+}
+
+.news__addNewsBtn:hover {
+  box-shadow: rgba(0, 8, 255, 0.75) 0px 0px 0px 3px, rgba(98, 98, 98, 0.5) 0px 0px 0px 6px, rgba(98, 98, 98, 0.2) 0px 0px 0px 9px;
+  cursor: pointer;
+}
+
+/* Committee */
+
+.committee__subtitleContainer {
+  margin: 0 !important;
+}
+
+/* Membership */
+
+.membership__formButton {
+  background-color: transparent;
+  border-radius: 2rem;
+  border-color: #083d74;
+  color: #083d74 !important;
+  width: auto;
+}
+
+.membership__formButton:hover {
+  background-color: #083d74;
+  color: rgb(255, 255, 255) !important;
+  border-color: #083d74;
+}
+
+.membership__benefitsContainer li {
+  margin-bottom: 1rem;
+}
+
+.membership__eligibilityContainer li {
+  margin-bottom: 1rem;
+}
+
+/* events */
+
+.events__calendar {
+  width: 100%;
+  height: 30rem;
+}
+
+/* contact component */
+
+.contact__presidentImage {
+  width: 10rem;
+  height: 10rem;
+  object-fit: cover;
+  border-radius: 10rem;
+}
+
+.contact__presidentCard {
+  background-color: white;
+  width: 15rem;
+}
+
+.contact__newsletter {
+  width: 28rem;
+  min-height: 26rem;
+}
+
+/* footer */
+
+footer {
+  background-color: #083d74;
+}
+
+.footer__linkText a {
+  font-size: 12px;
+  font-weight: 100;
+}
+
+.footer__linkText a:hover {
+  font-size: 12px;
+  font-weight: 100;
+  text-decoration: underline !important;
+}
+
+.footer__linkText p {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* media queries */
+@media screen and (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .contact__newsletter {
+    width: 20rem;
+    min-height: 26rem;
+  }
+
+  .promo__video {
+    border-radius: 2rem;
+    overflow: hidden;
+  }
+
+  .pdf-viewer {
+    width: 100%;
+    min-height: 40rem;
+  }
+
+  .slideShow__images {
+    object-fit: cover;
+    width: 100%;
+    height: 25rem;
+  }
+  .itemButton__row {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px
+  }
+  .navbar__joinNow {
+    background-color: none;
+    border: none;
+    font-size: 1.2rem;
+    text-decoration: none;
+    margin-right: 20px;
+    padding: 0;
+  }
+  .navbar__joinNow:hover {
+    background-color: none;
+    color: none;
+  }
+}
+
+
+@media screen and (min-width: 771px) and (max-width: 1000px) {}
+
+@media screen and (min-width: 577px) and (max-width: 770px) {}
+
+@media screen and (max-width: 340px) {
+  .contact__newsletter {
+    width: 16rem;
+    min-height: 26rem;
+  }
+}

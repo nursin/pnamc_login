@@ -1,0 +1,9 @@
+{
+  "projects": {
+    "default": "test-pnamc-3a9bd",
+    "testing": "test-pnamc-3a9bd",
+    "pnamc": "pnamc-eb0c4"
+  },
+  "targets": {},
+  "etags": {}
+}

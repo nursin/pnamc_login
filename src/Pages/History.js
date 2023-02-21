@@ -1,0 +1,56 @@
+import React from 'react'
+import { Col, Container, Row } from 'reactstrap'
+import pnaa_logo from '../PNAA_logo.png';
+import pnamc_logo from '../PNAMC_chapter_logo_transparent.png';
+
+function History() {
+  return (
+    <Container className='news'>
+      <Row className='text-center mt-4'>
+        <Col>
+          <img src={pnamc_logo} alt='pnamc logo' />
+        </Col>
+        <Col>
+          <img src={pnaa_logo} alt='pnaa logo' />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <h1 className='text-center text-black my-3'>Philippine Nurses Association of<br /> Maryland Chapter (PNAMC) History</h1>
+        </Col>
+      </Row>
+      <Row>
+        <Col md={8} className='offset-md-2'>
+          <p className='text-black'>Commitment to one's profession can take many forms. The founding of the Philippine Nurses Association Maryland Chapter is the highest recognition, of who we are as Filipino American nurses in the community, state, and for the future generations.
+          </p>
+          <p className='text-black'>With the coming of the 2nd millennium and increasing recruitment of nurses from the Philippines, Vicky Navarro, Dina Krenzischek, Erna Gutierrez, Hermi Nudo, Lucy Romero and Rose Bartolome realized the importance of passing on the legacy to the next generation of Filipino American nurses i.e. what we have achieved and established in the community. The main goal was to continue to exemplify role model behaviors of a  professional nurse with the integration of the culture and values of our country of origin and our home country in caring for our patients. In 2001, Lolita Compas 10th Philippine Nurses Association of America (PNAA) President met with Vicky Navarro and Dina Krenzischek at The Johns Hopkins Hospital to encourage establishing a PNA chapter. Lolita Compass told the story PNAA, its vision, mission  and what the organization has accomplished to establish a professional organization to unify the Filipino American Nurses. The inspiring conversation led the establishment of PNA Maryland as the 9th chapter of the PNAA Eastern Region and 34th Chapter of PNAA.
+          </p>
+          <p className='text-black'>
+            In Fall 2002, our first meeting was held with the 1st Interim Board of Directors (BoD): Victoria Navarro - president, Dina Krenzischek—President Elect, Felisa Tanseco—Treasurer and Janet Brigoli—Secretary. Board of Directors: Lucy Romero, Hermie Nudo, Virginia Alinsao, By Laws Chair, Erna Gutierrez. In 2003, the 1st election was conducted  and the Interim BoD were elected officially inducted as the new PNAMC Executive Board of Directors in front of the General Assembly. Our mission was to provide a professional organization that will uphold the image and foster the welfare of Filipino-American nurses in the State of Maryland
+          </p>
+          <p className='text-black'>
+            In 2003 to 2006, under the leadership of Victoria Navarro, with more than 100 members, the focus was in building a solid organizational foundation through development of our basic structures as a chapter of PNAA. Ms. Fely Tanseco had been recognized for recruiting the highest number of members during our early years. The new chapter was introduced to the nurse leaders of key Maryland Hospitals with a sizable population of Filipino nurses. The Johns Hopkins Hospital, University of Maryland, Kernan Hospital, Sinai Hospital, Maryland General Hospital and Harbor Hospital hosted our quarterly General Assemblies. Johns Hopkins Bayview, Franklin Square and St. Agnes Hospital continued the tradition with the succeeding presidents. The visibility continued with the Maryland Board of Nursing, Asian Pacific organizations and the Philippine Embassy in Washington, DC. PNA Maryland was one of the first organizations to be part of the Migrant Heritage Commission. As a 2 year old chapter, we hosted the 9th PNAA Eastern Regional Nursing Conference with PNA Metropolitan DC, a most successful partnership never replicated in other regions. The 1st golf tournament was organized by Ms. Cora Sarmiento to raise funds for Gawad Kalinga, a self help community housing program in the Philippines. Today, Victoria is the 17th President of the Philippine Nurses Association of America
+          </p>
+          <p className='text-black'>
+            In 2007 and 2008. Dina Krenzischek was the PNAMC President. The highlights of these years were the creation of strategic planning; fiscal year budget: non-exempt status in the state of Maryland; 1st annual PNAMC seminar; 1st community service in the city of Baltimore; 1st newsletter and website; and re-building of the PNAMC infra structure through committees (Chair of Education-Fe Nieves, By Laws/Membership-Erna Gutierrez, Chair of Social-Li Salada, chair of Newsletter and Website- Maria Yang/Jing Rodriguez, Chair of Hospital Ambassadors- Pen Jarina). This year, the PNAMC received a Proclamation from the Governor Martin O’Malley of the State of Maryland during the Asian Pacific American Heritage Month, and another Proclamation from Governor O'Malley recognizing PNAMC on behalf of the citizens of Maryland for the "First Annual Foreign Educated Nurses Best Practices in Recruitment and Management". Dina served as the Chair of the Council of State Presidents of the Philippine Nurses Association of America and the PNAA Chair of the Kababayan Emergency Preparedness Funding for the Philippine disaster victims.
+          </p>
+          <p className='text-black'>
+            In 2009 and 2010, Dino Doliente III was the 3rd PNAMC President. His energetic leadership lead to the highest membership growth of PNAMC that created the 1st subchapter— The PNAMC Southern Maryland Subchapter under the leadership of Leorey Salian. In 2009, Dino with Lil Salada led with an Olympian effort the chapter’s first hosting of a national convention in collaboration with PNA Metropolitan DC - the historic 30th PNAA Annual National Convention in Baltimore. His presidency also marked the 1st PNAMC International Community Outreach in 3 communities in Davao, Philippines in 2010 under the leadership of Sonya  Neumeir and Aleli Frias. This also pave the way for PNAMC to provide its 1st Philippine School of Nursing free seminary to the San Pedro College of Nursing students and professionals. Through it all, PNAMC has been successful in raising funds that supported the many projects and programs during Dino’s term. Dino also served as the Forum Leader of the PNAA Circle Of Presidents (COP) and more recently, Board Member of PNAA. Today, Dino is the Eastern Region Vice President of the Philippi Nurses Association of America.
+          </p>
+          <p className='text-black'>
+            In 2011 and 2012, Fe Nieves Khouw was the 4th PNAMC President. Fe’s commitment and passion led to the1st connection and socialization of elderly Filipinos in the State through wellness and education; continue to be the strong backbone of PNAMC education; 2nd International Community Outreach in underserved community in Bakun, Benguet, Philippines and in combination with nursing educational seminar in the School of Nursing I'm home nursing students and professional nurses in the Philippines. PNAMC supported the abused and abandoned children, a program under Saint Louis University in the Philippines. In 2012 PNAMC contributed to the donation of the mobile clinic for the underserved community reaching out thousands of Filipinos in Davao without medical care after 9 years, the PNAMC Executive Board under the leadership of Fe reviewed and updated the By Laws. Fe served as the Forum Leader of the Circle of Presidents (COP) of the Philippine Nurses Association of America and active in the PNAA education committee.
+          </p>
+          <p className='text-black'>
+            In 2013 and 2014, Virginia Alinsao is the  5th PNAMC President. Virginia’s expertise and connections with new and future nurses are valuable to our organization. She is passionate in the engagement of new and young Filipino nurses who graduated both in the US and in the Philippines and partnering with them with Filipino nurses who are willing to be mentors in the workplace. She is a strong advocate for Filipino nurses to pursue Advanced practice roles. She continues to be a valuable resource to the community. Her focus is the development of the new generation of PNAMC leaders and the visibility of Filipino nurses, locally, nationally and globally. Virginia has a unique position because she has an established network with Filipino nurses internationally in the Philippines, United Arab Emirates, United Kingdom, Kingdom of Saudi Arabia and Kuwait. It was during her term when the Haiyan storm caused a massive devastation to  the Filipino families specially in the Eastern Visayas Region. She initiated and coordinated fund riaising activities for Haiyan survivors in Iloilo and Cebu. PNAMC provided initial funds to Saint Paul University, Iloilo to develop Caritas Christi village to the poor community affected by typhoon Haiyan. She also led the third International Community Outreach Program of PNAMC in Iloilo City and Passi City providing free dental and medical attention as well as free medicines to hundreds of underprivileged Filipinos. PNAMC also distributed school supplies to elementary school children and donated a variety of goods to two barangays in Concepcion, Iloilo.
+          </p>
+          <p className='text-black'>
+            In  2015 to 2016 Lovella “Love” Eugenio is the 6th PNAMC President. Love remains very supportive of the PNAMC programs and activities from the time the organization was established in 2003 up to the present time. Love together with the PNAMC officers and committed members, maintained PNAMC ’s visibility and support to the various programs and activities of the Filipino American community to name a few,  the Community Health Fair and the People’s Ball initiated by the Migrant Heritage Commission, the Filipino Festival in Timonium  Maryland organized by the Katipunan group, and the Haiyan project by the Philippine Humanitarian Commission. She has represented PNAMC during the Maryland Nurses Lobby Night in Annapolis in 2015 to show PNAMC ’s strong support on issues affecting the welfare of all nurses in Maryland. Under her leadership and the involvement of Eryl Quilao, PNAMC Education Chair, PNAMC has continued to provide CEU’s to members during its quarterly General Assembly. Also, with the active involvement of Cora Sarmiento and Erna Gutierrez, both in charge of the Community Involvement Projects, PNAMC has successfully raised funds to support the Fourth Medical Mission to the Philippines in Ilin Island and San Jose Occidental Mindoro She represented PNAMC during the PNAA National Convention in Hawaii and the Eastern Regional Conference in Virginia.  Love Eugenio continues to sustain the energy that her predecessors have started with PNAMC.
+          </p>
+        </Col>
+      </Row>
+
+    </Container >
+  )
+}
+
+export default History
