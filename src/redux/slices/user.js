@@ -37,13 +37,14 @@ export const setUserOrCreateAndSet = createAsyncThunk(
         try {
             // check if user exist in db users
             db
-                .collection("users")
-                .doc(user.uid)
-                .get()
-                .then((snapshot) => {
-                    if (snapshot.exists) {
-                        setUser(user)
-                    } else {
+            .collection("users")
+            .doc(user.uid)
+            .get()
+            .then((snapshot) => {
+                if (snapshot.exists) {
+                    setUser(user)
+                } else {
+                        console.log("Setting user: ", user)
                         // post new user profile in db
                         db
                             .collection("users")

@@ -54,6 +54,15 @@ a:link {
   min-height: 50rem;
 }
 
+/* text for alternative login and create modal that links to other areas */
+.alt-text {
+  color: rgb(0, 119, 255) !important;
+  font-size: 14px !important;
+} 
+.alt-text:hover {
+  text-decoration: underline;
+} 
+
 /* navbar */
 nav {
   background-color: #083d74;
@@ -114,7 +123,7 @@ img.navbar-logo-right {
 .navbar__joinNow {
   background-color: transparent;
   border-radius: 2rem;
-  border-color: white;
+  border: none;
   color: white;
 }
 
@@ -122,6 +131,61 @@ img.navbar-logo-right {
   background-color: white;
   color: black;
 }
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: rgb(255, 255, 255);
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+.sidebar a, button {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+  border: none;
+  background-color: white;
+}
+.sidebar a:hover, button:hover {
+  color: #f1f1f1;
+  transition: 0.5s;
+}
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #111;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+.openbtn:hover {
+  background-color: #444;
+  transition: 0.5s;
+}
+
+.profileAvatar {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 10rem;
+  border: 2px solid #e0e1dd;
+  cursor: pointer;
+}
+
 
 /* Login Modal, Sign up Modal  */
 .modal-content {
@@ -140,33 +204,47 @@ img.navbar-logo-right {
   color: black;
 }
 
-.singin__googleFormButton {
-  background-color: transparent;
+.signin__googleFormButton {
+  background-color: rgb(253, 65, 65);
   border-radius: 2rem;
-  border-color: red;
-  color: red !important;
+  border-color: transparent;
+  color: white !important;
   width: auto;
 }
 
-.singin__googleFormButton:hover {
+.signin__googleFormButton:hover {
   background-color: red;
   color: rgb(255, 255, 255) !important;
-  border-color: red;
+  border-color: rgb(253, 65, 65);
 }
 
-/* .navbar-toggler {
-  border: 0;
-  outline: 0;
-  outline-style: none;
-  box-shadow: none;
+.signin__email {
+  background-color: rgb(64, 64, 255);
+  border-radius: 2rem;
+  border-color: transparent;
+  color: white !important;
+  width: auto;
 }
 
-.navbar-toggler:focus {
-  border: 0;
-  outline: 0;
-  outline-style: none;
-  box-shadow: none;
-} */
+.signin__email:hover {
+  background-color: blue;
+  color: rgb(255, 255, 255) !important;
+  border-color: blue;
+}
+
+.joinModal__createAccount {
+  background-color: #083d74;
+  border-radius: 2rem;
+  border-color: transparent;
+  color: white !important;
+  width: auto;
+}
+
+.joinModal__createAccount:hover {
+  background-color: blue;
+  color: rgb(255, 255, 255) !important;
+  border-color: blue;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .navbar-logo-right {

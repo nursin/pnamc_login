@@ -23,12 +23,14 @@ import { auth } from './firebase';
 // redux shit
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from './redux/slices/user';
+import Account from './Pages/Account';
+import CreateAccount from './Pages/CreateAccount';
 
 function App() {
   // redux shit
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-
+  console.log("user:", user)
   useEffect(() => {
     const getUserAuth = () => {
       auth.onAuthStateChanged(async (user) => {
@@ -44,7 +46,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <UnderConstruction />
+        {/* <UnderConstruction /> */}
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -60,6 +62,8 @@ function App() {
           <Route path="/events" element={<Events />} />
           <Route path="/membership" element={<Membership />} />
           <Route path="/donate" element={<Donate />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/create-account" element={<CreateAccount />} />
         </Routes>
         <Footer />
       </BrowserRouter>
