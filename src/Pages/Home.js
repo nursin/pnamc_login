@@ -26,7 +26,7 @@ function Home() {
             <hr className='mx-5 my-5' />
             <Promo title={presidentMessageIntroTitle} text={presidentMessageIntroText} image={presidentMessageIntroImage} buttonTitle="Read more" buttonLink='/presidents-message' order={false} />
             <hr className='mx-5 my-5' />
-            <Promo title={eventGalaTitle} text={eventGalaText} video={"V0P5uu9Yp1Q"} order={true} />
+            <Promo title={eventGalaTitle} text={eventGalaText} video={"dalOhI18JJU"} order={true} />
             <hr className='mx-5 my-5' />
             <Promo title={medicalMissionTitle} text={medicalMissionText} slideShowImages={medicalMissionSlideShowImages} buttonTitle="Read more" buttonLink='https://drive.google.com/drive/folders/1EqqNFPWd-uh2KXM0e7EGAVONI59Pc737?usp=share_link' order={false} />
             <Contact />

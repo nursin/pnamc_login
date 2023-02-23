@@ -44,7 +44,6 @@ export const setUserOrCreateAndSet = createAsyncThunk(
                 if (snapshot.exists) {
                     setUser(user)
                 } else {
-                        console.log("Setting user: ", user)
                         // post new user profile in db
                         db
                             .collection("users")
@@ -60,6 +59,7 @@ export const setUserOrCreateAndSet = createAsyncThunk(
                                     merge: true
                                 }
                             )
+                        
                     }
                 })
         } catch (err) {

@@ -63,6 +63,11 @@ a:link {
   text-decoration: underline;
 } 
 
+.alt-p {
+  font-size: 14px;
+  font-weight: 300;
+}
+
 /* navbar */
 nav {
   background-color: #083d74;
@@ -132,58 +137,26 @@ img.navbar-logo-right {
   color: black;
 }
 
-.sidebar {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  right: 0;
-  background-color: rgb(255, 255, 255);
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
-}
-.sidebar a, button {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
-  border: none;
-  background-color: white;
-}
-.sidebar a:hover, button:hover {
-  color: #f1f1f1;
-  transition: 0.5s;
-}
-.sidebar .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
-}
-.openbtn {
-  font-size: 20px;
-  cursor: pointer;
-  background-color: #111;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-}
-.openbtn:hover {
-  background-color: #444;
-  transition: 0.5s;
-}
-
 .profileAvatar {
   width: 3rem;
   height: 3rem;
   border-radius: 10rem;
   border: 2px solid #e0e1dd;
   cursor: pointer;
+}
+
+.profileAvatar-noImage {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 10rem;
+  border: 2px solid #e0e1dd;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: #6c757d;
+  margin: auto;
 }
 
 
@@ -328,6 +301,9 @@ img.navbar-logo-right {
 .mycarousel__homePageFirst {
   width: 100vw;
 }
+.carousel-control-next, .carousel-control-prev {
+  z-index: 0;
+}
 
 .mycarousel__caption {
   display: block !important;
@@ -347,7 +323,21 @@ img.navbar-logo-right {
 .promo__video {
   border-radius: 2rem;
   overflow: hidden;
-  height: 22.5rem;
+  float: none;
+  clear: both;
+  width: 100%;
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 25px;
+  height: 0;
+}
+
+.promo__video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .slideShow__images {

@@ -34,7 +34,10 @@ function Promo({ title, text, image, video, slideShowImages, buttonTitle, button
                         {image ?
                             <img src={image} className='promo__image' alt='' /> : ""}
                         {video ?
-                            <YouTube className='promo__video' videoId={video} opts={opts} /> : ""}
+                            <div className='promo__video'>
+                                <YouTube videoId={video} opts={opts} />
+                            </div>
+                            : ""}
                         {slideShowImages ?
                             <Zoom {...properties} scale={0.9} indicators={false}>
                                 {slideShowImages.map((each, index) => (

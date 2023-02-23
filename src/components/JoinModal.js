@@ -43,7 +43,7 @@ function JoinModal() {
                     <img src={pnamc_logo} className="mx-auto" alt="PNAMC Logo" />
                     {/* create account takes user to fill out application to join & create account login */}
                     <Link
-                        className='joinModal__createAccount mx-auto m-3 p-2'
+                        className='joinModal__createAccount mx-auto m-3 px-2 py-1'
                         to="/create-account"
                         onClick={() => setIsLoginModalOpen(false)}
                     >
