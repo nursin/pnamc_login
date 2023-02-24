@@ -28,7 +28,7 @@ function SigninModal() {
         <>
             <Button outline className='navbar__signin text-md-center fw-bold ms-2 py-1'
                 onClick={() => setIsSigninModalOpen(isSigninModalOpen ? false : true)}
-            >Sign in</Button>
+            >Login<FontAwesomeIcon icon="fa-regular fa-right-to-bracket" /></Button>
             <Modal
                 className='createWurker__modal'
                 size="sm"
@@ -40,18 +40,18 @@ function SigninModal() {
                 </ModalHeader>
                 <ModalBody className='d-flex flex-column pt-4'>
                     <img src={pnamc_logo} className="mx-auto" alt="PNAMC Logo" />
-                    <p className='alt-p text-black text-center mt-3 mb-1'>Signin/Join by clicking an option</p>
+                    <p className='alt-p text-black text-center mt-3 mb-1'>Login/Join by clicking an option</p>
                     <Button
                         className='signin__googleFormButton mx-auto fw-bold'
                         onClick={signInWithGoogle}
                     >
-                        Sign in with Google
+                        Continue with Google
                         <FontAwesomeIcon icon={faGoogle} className="fs-5 ms-2" />
                     </Button>
                     <Button
                         className='signin__email mx-auto fw-bold  m-3'
                     >
-                        Sign in with email
+                        Continue with email
                     </Button>
                     {/* takes user to the create  */}
                     {/* <p className='text-black text-center mt-4 mb-0'>Dont have an account?</p>

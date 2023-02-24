@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import pnaa_logo from '../PNAA_logo.png';
 import pnamc_logo from '../PNAMC_chapter_logo_transparent.png';
 import { Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, Collapse, Button } from 'reactstrap';
@@ -17,6 +17,10 @@ function Header() {
     const dispatch = useDispatch();
     const location = useLocation();
     const { user } = useSelector((state) => state.user);
+
+    // useEffect(() => {
+
+    //   }, [user]);
 
     const signOut = () => {
         auth.signOut()
@@ -56,7 +60,7 @@ function Header() {
                         <NavItem><NavLink onClick={() => setIsOpen(false)} to='/membership'>Membership</NavLink></NavItem>
                         <NavItem><NavLink onClick={() => setIsOpen(false)} to='/donate'>Donate</NavLink></NavItem>
                         {/* <NavItem onClick={() => setIsOpen(false)} className='d-xl-none'><SigninModal /></NavItem> */}
-                        {/* <img src={pnaa_logo} className="navbar-logo-expanded d-xl-none" alt="PNAA logo" /> */}
+                        <img src={pnaa_logo} className="navbar-logo-expanded d-xl-none" alt="PNAA logo" />
                     </Nav>
                 </Collapse>
                 <div className='d-none d-xl-block'>
@@ -87,7 +91,7 @@ function Header() {
                                 <SigninModal />
                             </>
                     }
-                    {/* <img src={pnaa_logo} className="navbar-logo-right ms-2" alt="PNAA logo" /> */}
+                    <img src={pnaa_logo} className="navbar-logo-right ms-2" alt="PNAA logo" />
                 </div>
             </Navbar>
         </nav>
