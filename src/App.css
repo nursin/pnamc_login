@@ -160,6 +160,12 @@ img.navbar-logo-right {
   margin: auto;
 }
 
+.header__loginAvatar {
+  fill: lightgray;
+  border: 2px solid white;
+  border-radius: 15rem;
+}
+
 
 /* Login Modal, Sign up Modal  */
 .modal-content {
