@@ -25,6 +25,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from './redux/slices/user';
 import Account from './Pages/Account';
 import CreateAccount from './Pages/CreateAccount';
+import MembershipPayment from './Pages/MembershipPayment';
 
 function App() {
   // redux shit
@@ -94,6 +95,7 @@ function App() {
           <Route path="/donate" element={<Donate />} />
           <Route path="/account" element={<Account />} />
           <Route path="/create-account" element={<CreateAccount />} />
+          <Route path="/membership-payment" element={<MembershipPayment />} />
         </Routes>
         <Footer />
       </BrowserRouter>

@@ -5,20 +5,25 @@ import { Button, Col, Container, Form, FormGroup, Input, Label, Row } from 'reac
 import { db, storage } from '../firebase';
 import firebase from 'firebase';
 
+import regexPhoneNumber from '../lib/formValidation';
+
 function CreateAccount() {
     const [fname, setFname] = useState('');
     const [mname, setMname] = useState('');
     const [lname, setLname] = useState('');
     const [email, setEmail] = useState('');
     const [yearsOfExp, setYearsOfExp] = useState('');
+    const [schools, setSchools] = useState('');
     const [degrees, setDegrees] = useState('');
     const [certs, setCerts] = useState('');
     const [certsIssuer, setCertsIssuer] = useState('');
+    const [certsExpiration, setCertsExpiration] = useState('');
     const [phone, setPhone] = useState('');
     const [gender, setGender] = useState('');
-    const [jobPosition, setJobPosition] = useState('');
+    // const [jobPosition, setJobPosition] = useState('');
     const [jobTitle, setJobTitle] = useState('');
-    const [practiceSetting, setPracticeSettings] = useState('');
+    const [practiceSetting, setPracticeSetting] = useState('');
+    const [practiceSettingOther, setPracticeSettingOther] = useState('');
     const [preferredContact, setPreferredContact] = useState('');
     const [addressCity, setAddressCity] = useState('');
     const [addressState, setAddressState] = useState('');
@@ -26,23 +31,29 @@ function CreateAccount() {
     const [address, setAddress] = useState('');
     const [dob, setDob] = useState('');
     const [recruitedBy, setRecruitedBy] = useState('');
-    const [rnLicenseExpiration, setRnLicenseExpiration] = useState('');
-    const [rnLicenseNumber, setRnLicenseNumber] = useState('');
-    const [schools, setSchools] = useState('');
+    const [licenseExpiration, setLicenseExpiration] = useState('');
+    const [licenseNumber, setLicenseNumber] = useState('');
     const [workplace, setWorkplace] = useState('');
+    const [membership, setMembership] = useState('');
+    const [membershipType, setMembershipType] = useState('');
+    const [membershipExpiration, setMembershipExpiration] = useState('');
     const [references, setReferences] = useState('');
-    const [imageFile, setImageFile] = useState(null);
+    const [imageFile, setImageFile] = useState('');
     const [progress, setProgress] = useState(0);
     // redux
     const { user } = useSelector((state) => state.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const handleChange = (e) => {
+    const handleImage = (e) => {
         if (e.target.files[0]) {
             setImageFile(e.target.files[0])
         }
     };
+
+    const handleNext = () => {
+        console.log(fname, mname, lname, address, addressCity, addressState, addressZip, phone, email, preferredContact, dob, gender, imageFile, jobTitle, schools, degrees, licenseNumber, licenseExpiration, certs, certsIssuer, certsExpiration, practiceSetting, recruitedBy, membership, membershipType, membershipExpiration);
+    }
 
     const handleCreateMember = () => {
         const uploadTask = storage.ref(`member-images/${user.uid}`).put(imageFile);
@@ -83,9 +94,10 @@ function CreateAccount() {
                                 degrees: degrees.toLowerCase(),
                                 certs: certs.toLowerCase(),
                                 certs_issuer: certsIssuer.toLowerCase(),
-                                job_position: jobPosition.toLowerCase(),
+                                // job_position: jobPosition.toLowerCase(),
                                 job_title: jobTitle.toLowerCase(),
                                 practice_setting: practiceSetting.toLowerCase(),
+                                practice_setting_other: practiceSettingOther.toLowerCase(),
                                 preferred_contact: preferredContact.toLowerCase(),
                                 phone: phone.toLowerCase(),
                                 address: address.toLowerCase(),
@@ -94,10 +106,13 @@ function CreateAccount() {
                                 address_zip: addressZip.toLowerCase(),
                                 references: references.toLowerCase(),
                                 recruited_by: recruitedBy.toLowerCase(),
-                                rn_license_expiration: rnLicenseExpiration.toLowerCase(),
-                                rn_license_number: rnLicenseNumber.toLowerCase(),
+                                license_expiration: licenseExpiration.toLowerCase(),
+                                license_number: licenseNumber.toLowerCase(),
                                 schools: schools.toLowerCase(),
                                 workplace: workplace.toLowerCase(),
+                                membership: membership.toLowerCase(),
+                                membership_type: membershipType.toLowerCase(),
+                                membership_expiration: membershipExpiration.toLowerCase(),
                                 photo_url: url,
                             },
                                 {
@@ -114,9 +129,10 @@ function CreateAccount() {
                         setCerts('')
                         setCertsIssuer('')
                         setGender('');
-                        setJobPosition('');
+                        // setJobPosition('');
                         setJobTitle('');
-                        setPracticeSettings('');
+                        setPracticeSetting('');
+                        setPracticeSettingOther('');
                         setPreferredContact('');
                         setAddressCity('');
                         setAddressState('');
@@ -124,22 +140,34 @@ function CreateAccount() {
                         setAddress('');
                         setDob('');
                         setRecruitedBy('');
-                        setRnLicenseExpiration('');
-                        setRnLicenseNumber('');
+                        setLicenseExpiration('');
+                        setLicenseNumber('');
                         setSchools('');
                         setWorkplace('');
-                        setReferences('')
-                        setImageFile(null)
+                        setMembership('');
+                        setMembershipType('');
+                        setReferences('');
+                        setImageFile(null);
                         // reroute to account page or homepage or events or something
                     })
             }
         )
+        if (membership === 'existing member') {
+            navigate('/account');
+        } else {
+            navigate('/membership-payment');
+        }
     };
 
+    // console.log(regexPhoneNumber(phone));
+
     return (
-        <Container>
+        <Container className='mb-3'>
             <Row className='my-3 text-center'>
                 <h3 className='fw-bold fs-2'>Create Member Account</h3>
+            </Row>
+            <Row>
+                <h3>Personal Information</h3>
             </Row>
             <Form>
                 <Row>
@@ -242,6 +270,20 @@ function CreateAccount() {
                     </Col>
                 </Row>
                 <Row>
+                    <Col md={4}>
+                        <FormGroup floating>
+                            <Input
+                                id="phone"
+                                placeholder="Phone"
+                                type="tel"
+                                value={phone}
+                                onChange={e => setPhone(e.target.value)}
+                            />
+                            <Label for="phone">
+                                Phone
+                            </Label>
+                        </FormGroup>
+                    </Col>
                     <Col>
                         <FormGroup floating>
                             <Input
@@ -256,81 +298,350 @@ function CreateAccount() {
                             </Label>
                         </FormGroup>
                     </Col>
+                    <Col md={3}>
+                        <FormGroup floating>
+                            <Input
+                                id="preferredContact"
+                                placeholder="Preferred Contact"
+                                type="select"
+                                value={preferredContact}
+                                onChange={e => setPreferredContact(e.target.value)}
+                                required
+                            >
+                                <option value={""}>--Choose option--</option>
+                                <option value={"phone"}>Phone</option>
+                                <option value={"email"}>Email</option>
+                                <option value={"mail"}>Mail</option>
+                            </Input>
+                            <Label for="preferredContact">
+                                Preferred Contact
+                            </Label>
+                        </FormGroup>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={6}>
+                        <FormGroup floating>
+                            <Input
+                                id="dob"
+                                placeholder="DOB"
+                                type="date"
+                                value={dob}
+                                onChange={e => setDob(e.target.value)}
+                            />
+                            <Label for="dob">
+                                DOB
+                            </Label>
+                        </FormGroup>
+                    </Col>
+                    <Col>
+                        <FormGroup floating>
+                            <Input
+                                id="gender"
+                                placeholder="Gender"
+                                type="select"
+                                value={gender}
+                                onChange={e => setGender(e.target.value)}
+                                required
+                            >
+                                <option value={""}>--Choose option--</option>
+                                <option value={"male"}>Male</option>
+                                <option value={"female"}>Female</option>
+                                <option value={"other"}>Other</option>
+                            </Input>
+                            <Label for="gender">
+                                Gender
+                            </Label>
+                        </FormGroup>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <FormGroup floating>
+                            <Input
+                                id="imageUpload"
+                                placeholder="Upload Profile Image"
+                                type="file"
+                                onChange={handleImage}
+                            />
+                            <Label for="dimageUploadob">
+                                Upload Profile Image
+                            </Label>
+                        </FormGroup>
+                    </Col>
+                </Row>
+                <hr />
+                <Row>
+                    <h3>Professional Information</h3>
+                </Row>
+                <Row>
+                    <Col>
+                        <FormGroup floating>
+                            <Input
+                                id="jobTitle"
+                                placeholder="Job Title"
+                                type="text"
+                                value={jobTitle}
+                                onChange={e => setJobTitle(e.target.value)}
+                            />
+                            <Label for="jobTitle">
+                                Job Title
+                            </Label>
+                        </FormGroup>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <FormGroup floating>
+                            <Input
+                                id="schools"
+                                placeholder="Schools"
+                                type="text"
+                                value={schools}
+                                onChange={e => setSchools(e.target.value)}
+                            />
+                            <Label for="schools">
+                                Schools
+                            </Label>
+                        </FormGroup>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <FormGroup floating>
+                            <Input
+                                id="degrees"
+                                placeholder="Degrees"
+                                type="text"
+                                value={degrees}
+                                onChange={e => setDegrees(e.target.value)}
+                            />
+                            <Label for="degrees">
+                                Degrees
+                            </Label>
+                        </FormGroup>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={6}>
+                        <FormGroup floating>
+                            <Input
+                                id="licenseNumber"
+                                placeholder="License Number"
+                                type="text"
+                                value={licenseNumber}
+                                onChange={e => setLicenseNumber(e.target.value)}
+                            />
+                            <Label for="licenseNumber">
+                                RN/MD License #
+                            </Label>
+                        </FormGroup>
+                    </Col>
+                    <Col>
+                        <FormGroup floating>
+                            <Input
+                                id="licenseExpiration"
+                                placeholder="License Expiration"
+                                type="date"
+                                value={licenseExpiration}
+                                onChange={e => setLicenseExpiration(e.target.value)}
+                            />
+                            <Label for="licenseExpiration">
+                                License Expiration
+                            </Label>
+                        </FormGroup>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md={4}>
+                        <FormGroup floating>
+                            <Input
+                                id="certification"
+                                placeholder="Certification"
+                                type="text"
+                                value={certs}
+                                onChange={e => setCerts(e.target.value)}
+                            />
+                            <Label for="certification">
+                                Certification
+                            </Label>
+                        </FormGroup>
+                    </Col>
+                    <Col md={4}>
+                        <FormGroup floating>
+                            <Input
+                                id="certificationIssuer"
+                                placeholder="Certification Issuer"
+                                type="text"
+                                value={certsIssuer}
+                                onChange={e => setCertsIssuer(e.target.value)}
+                            />
+                            <Label for="certificationIssuer">
+                                Certification Issuer
+                            </Label>
+                        </FormGroup>
+                    </Col>
+                    <Col>
+                        <FormGroup floating>
+                            <Input
+                                id="certificationExpiration"
+                                placeholder="Certification Expiration"
+                                type="date"
+                                value={certsExpiration}
+                                onChange={e => setCertsExpiration(e.target.value)}
+                            />
+                            <Label for="certificationExpiration">
+                                Certification Expiration
+                            </Label>
+                        </FormGroup>
+                    </Col>
                 </Row>
 
                 <FormGroup floating>
                     <Input
-                        id="examplePassword"
-                        name="password"
-                        placeholder="Password"
-                        type="password"
-                    />
-                    <Label for="examplePassword">
-                        Password
+                        id="practiceSetting"
+                        placeholder="Practice Setting"
+                        type="select"
+                        value={practiceSetting}
+                        onChange={e => setPracticeSetting(e.target.value)}
+                    >
+                        <option value={""}>--Please choose an option--</option>
+                        <option value={"hospital"}>Hospital</option>
+                        <option value={"asc"}>ASC</option>
+                        <option value={"hospice"}>Hospice</option>
+                        <option value={"office/clinic"}>Office/Clinic</option>
+                        <option value={"management/administration"}>Management/Administration</option>
+                        <option value={"industry"}>Industry</option>
+                        <option value={"school"}>School</option>
+                        <option value={"long term care"}>Long Term Care</option>
+                        <option value={"home care"}>Home Care</option>
+                        <option value={"other"}>Other</option>
+                    </Input>
+                    <Label for="practiceSetting">
+                        Practice Setting
                     </Label>
                 </FormGroup>
-                <FormGroup floating>
-                    <Input
-                        id="examplePassword"
-                        name="password"
-                        placeholder="Password"
-                        type="password"
-                    />
-                    <Label for="examplePassword">
-                        Password
-                    </Label>
-                </FormGroup>
-                <FormGroup floating>
-                    <Input
-                        id="examplePassword"
-                        name="password"
-                        placeholder="Password"
-                        type="password"
-                    />
-                    <Label for="examplePassword">
-                        Password
-                    </Label>
-                </FormGroup>
-                <FormGroup floating>
-                    <Input
-                        id="examplePassword"
-                        name="password"
-                        placeholder="Password"
-                        type="password"
-                    />
-                    <Label for="examplePassword">
-                        Password
-                    </Label>
-                </FormGroup>
-                <FormGroup floating>
-                    <Input
-                        id="examplePassword"
-                        name="password"
-                        placeholder="Password"
-                        type="password"
-                    />
-                    <Label for="examplePassword">
-                        Password
-                    </Label>
-                </FormGroup>
-                <FormGroup floating>
-                    <Input
-                        id="examplePassword"
-                        name="password"
-                        placeholder="Password"
-                        type="password"
-                    />
-                    <Label for="examplePassword">
-                        Password
-                    </Label>
-                </FormGroup>
-                <Button>
-                    Submit
-                </Button>
+                {practiceSetting === "other" ?
+                    <FormGroup floating>
+                        <Input
+                            id="practiceSettingOther"
+                            placeholder="Practice Setting Other:"
+                            type="text"
+                            value={practiceSettingOther}
+                            onChange={e => setPracticeSettingOther(e.target.value)}
+                            required
+                        />
+                        <Label for="practiceSettingOther">
+                            Practice Setting Other:
+                        </Label>
+                    </FormGroup>
+                    :
+                    ""
+                }
+                <hr />
+                <Row>
+                    <h3>Membership</h3>
+                </Row>
+                <Row>
+                    <Col md={8}>
+                        <FormGroup floating>
+                            <Input
+                                id="recruitedBy"
+                                placeholder="Recruited By"
+                                type="text"
+                                value={recruitedBy}
+                                onChange={e => setRecruitedBy(e.target.value)}
+                            />
+                            <Label for="recruitedBy">
+                                Recruited By
+                            </Label>
+                        </FormGroup>
+                    </Col>
+                    <Col md={4}>
+                        <FormGroup floating>
+                            <Input
+                                id="membership"
+                                placeholder="Membership"
+                                type="select"
+                                value={membership}
+                                onChange={(e) => {
+                                    setMembership(e.target.value);
+                                    setMembershipType('');
+                                    setMembershipExpiration('');
+                                }}
+                            >
+                                <option value={""}>--Choose option--</option>
+                                <option value={"new member"}>New Member</option>
+                                <option value={"renewal"}>Renewal</option>
+                                <option value={"existing member"}>Existing Member</option>
+                            </Input>
+                            <Label for="membership">
+                                Membership
+                            </Label>
+                        </FormGroup>
+                    </Col>
+                    {membership === "existing member" ?
+                        <>
+                            <Col md={4}>
+                                <FormGroup floating>
+                                    <Input
+                                        id="membershipType"
+                                        placeholder="Membership Type"
+                                        type="select"
+                                        value={membershipType}
+                                        onChange={e => setMembershipType(e.target.value)}
+                                    >
+                                        <option value={""}>--Choose option--</option>
+                                        <option value={"regular member 1yr"}>Regular Member ($85/1yr)</option>
+                                        <option value={"regular member 2yr"}>Regular Member ($170/2yr)</option>
+                                        <option value={"associate member 1yr"}>Associate Member ($60/1yr)</option>
+                                        <option value={"associate member 2yr"}>Associate Member ($120/2yr)</option>
+                                        <option value={"retired non-practicing member 1yr"}>Retired Non-Practicing Member ($60/1yr)</option>
+                                        <option value={"retired non-practicing member 2yr"}>Retired Non-Practicing Member ($120/2yr)</option>
+                                        <option value={"student member 1yr"}>Student Member ($60/1yr)</option>
+                                        <option value={"student member 2yr"}>Student Member ($120/2yr)</option>
+                                        <option value={"auxillary member 1yr"}>Auxillary Member ($25/1yr)</option>
+                                        <option value={"auxillary member 2yr"}>Auxillary Member ($50/2yr)</option>
+                                    </Input>
+                                    <Label for="membershipType">
+                                        Membership Type
+                                    </Label>
+                                </FormGroup>
+                            </Col>
+                            <Col>
+                                <FormGroup floating>
+                                    <Input
+                                        id="membershipTypeExpiration"
+                                        placeholder="Membership Type Expiration"
+                                        type="date"
+                                        value={membershipExpiration}
+                                        onChange={e => setMembershipExpiration(e.target.value)}
+                                    />
+                                    <Label for="membershipTypeExpiration">
+                                        Current Membership Expiration
+                                    </Label>
+                                </FormGroup>
+                            </Col>
+                            <Col md={12} className='text-center'>
+                                <Button
+                                    onClick={handleCreateMember}
+                                >
+                                    Submit
+                                </Button>
+                            </Col>
+                        </>
+                        :
+                        <Col md={12} className='text-center'>
+                            <Button
+                                onClick={handleCreateMember}
+                            >
+                                Next
+                            </Button>
+                        </Col>
+                    }
+                </Row>
             </Form>
         </Container>
-        // application data entry
-        // signup buttons google/emailLink
     )
 }
 
