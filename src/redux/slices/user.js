@@ -53,7 +53,9 @@ export const setUserOrCreateAndSet = createAsyncThunk(
                                 auth_uid: user.uid,
                                 display_name: user.displayName.toLowerCase(),
                                 email: user.email.toLowerCase(),
-                                photo_url: user.photoURL
+                                photo_url: user.photoURL,
+                                has_app_on_file: false,
+                                has_paid_membership: false,
                             },
                                 {
                                     merge: true

@@ -9,12 +9,14 @@ import firebase from 'firebase';
 // redux
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser, setUserOrCreateAndSet } from '../redux/slices/user';
+import { useNavigate } from 'react-router-dom';
 
 const memberApplication = "https://firebasestorage.googleapis.com/v0/b/pnamc-eb0c4.appspot.com/o/PNAMCMembershipApplicationForm.doc?alt=media&token=f54bb1ad-0b8f-4e7f-a90a-1456e68389f8"
 
 function SigninModal() {
     const [isSigninModalOpen, setIsSigninModalOpen] = useState(false);
     const [email, setEmail] = useState('');
+    const navigate = useNavigate();
 
     const sendSignInLinkToEmail = () => {
         auth.sendSignInLinkToEmail(email, actionCodeSettings)

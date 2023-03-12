@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Button, Col, Container, Form, FormGroup, Input, Label, Row } from 'reactstrap'
@@ -12,7 +12,6 @@ function CreateAccount() {
     const [mname, setMname] = useState('');
     const [lname, setLname] = useState('');
     const [email, setEmail] = useState('');
-    const [yearsOfExp, setYearsOfExp] = useState('');
     const [schools, setSchools] = useState('');
     const [degrees, setDegrees] = useState('');
     const [certs, setCerts] = useState('');
@@ -33,13 +32,12 @@ function CreateAccount() {
     const [recruitedBy, setRecruitedBy] = useState('');
     const [licenseExpiration, setLicenseExpiration] = useState('');
     const [licenseNumber, setLicenseNumber] = useState('');
-    const [workplace, setWorkplace] = useState('');
     const [membership, setMembership] = useState('');
     const [membershipType, setMembershipType] = useState('');
     const [membershipExpiration, setMembershipExpiration] = useState('');
-    const [references, setReferences] = useState('');
     const [imageFile, setImageFile] = useState('');
     const [progress, setProgress] = useState(0);
+    const [error, setError] = useState("")
     // redux
     const { user } = useSelector((state) => state.user);
     const dispatch = useDispatch();
@@ -51,9 +49,22 @@ function CreateAccount() {
         }
     };
 
-    const handleNext = () => {
-        console.log(fname, mname, lname, address, addressCity, addressState, addressZip, phone, email, preferredContact, dob, gender, imageFile, jobTitle, schools, degrees, licenseNumber, licenseExpiration, certs, certsIssuer, certsExpiration, practiceSetting, recruitedBy, membership, membershipType, membershipExpiration);
-    }
+    // function validForm() {
+    //    const formValues = [fname, mname, lname, address, addressCity, addressState, addressZip, phone, email, preferredContact, dob, gender, jobTitle, schools, degrees, licenseNumber, licenseExpiration, practiceSetting, membership, membershipType, membershipExpiration];
+    //    for (let i = 0; i < formValues.length; i++) {
+    //     if (formValues[i].length < 1) {
+    //         console.log("false")
+    //         setError(formValues[i].keys)
+    //         alert(error)
+    //         return false
+    //     } else {
+    //         console.log(true)
+    //         return true
+    //     }
+    //    }
+    // }
+
+
 
     const handleCreateMember = () => {
         const uploadTask = storage.ref(`member-images/${user.uid}`).put(imageFile);
@@ -79,21 +90,21 @@ function CreateAccount() {
                     .then(url => {
                         // post image in db
                         db
-                            .collection("users")
+                            .collection("users-applications")
                             .doc(user.uid)
                             .set({
                                 created: firebase.firestore.FieldValue.serverTimestamp(),
-                                authUid: user.uid,
+                                auth_uid: user.uid,
                                 first_name: fname.toLowerCase(),
                                 middle_name: mname.toLowerCase(),
                                 last_name: lname.toLowerCase(),
                                 email: email.toLowerCase(),
                                 gender: gender.toLowerCase(),
                                 dob: dob.toLowerCase(),
-                                years_of_exp: yearsOfExp.toLowerCase(),
                                 degrees: degrees.toLowerCase(),
                                 certs: certs.toLowerCase(),
                                 certs_issuer: certsIssuer.toLowerCase(),
+                                certs_expiration: certsExpiration.toLowerCase(),
                                 // job_position: jobPosition.toLowerCase(),
                                 job_title: jobTitle.toLowerCase(),
                                 practice_setting: practiceSetting.toLowerCase(),
@@ -104,16 +115,14 @@ function CreateAccount() {
                                 address_city: addressCity.toLowerCase(),
                                 address_state: addressState.toLowerCase(),
                                 address_zip: addressZip.toLowerCase(),
-                                references: references.toLowerCase(),
                                 recruited_by: recruitedBy.toLowerCase(),
                                 license_expiration: licenseExpiration.toLowerCase(),
                                 license_number: licenseNumber.toLowerCase(),
                                 schools: schools.toLowerCase(),
-                                workplace: workplace.toLowerCase(),
                                 membership: membership.toLowerCase(),
                                 membership_type: membershipType.toLowerCase(),
                                 membership_expiration: membershipExpiration.toLowerCase(),
-                                photo_url: url,
+                                photo_url: url
                             },
                                 {
                                     merge: true
@@ -123,7 +132,6 @@ function CreateAccount() {
                         setMname('')
                         setLname('')
                         setEmail('')
-                        setYearsOfExp('')
                         setDegrees('')
                         setPhone('')
                         setCerts('')
@@ -143,18 +151,27 @@ function CreateAccount() {
                         setLicenseExpiration('');
                         setLicenseNumber('');
                         setSchools('');
-                        setWorkplace('');
-                        setMembership('');
                         setMembershipType('');
-                        setReferences('');
                         setImageFile(null);
                         // reroute to account page or homepage or events or something
                     })
             }
         )
+        db
+            .collection("users")
+            .doc(user.uid)
+            .set({
+                has_app_on_file: true
+            },
+                {
+                    merge: true
+                }
+            )
         if (membership === 'existing member') {
+            setMembership('');
             navigate('/account');
         } else {
+            setMembership('');
             navigate('/membership-payment');
         }
     };
@@ -178,6 +195,7 @@ function CreateAccount() {
                                 placeholder="Password"
                                 value={fname}
                                 onChange={e => setFname(e.target.value)}
+                                required
                             />
                             <Label for="firstName">
                                 First Name
@@ -204,6 +222,7 @@ function CreateAccount() {
                                 placeholder="Last Name"
                                 value={lname}
                                 onChange={e => setLname(e.target.value)}
+                                required
                             />
                             <Label for="lastName">
                                 Last Name
@@ -220,6 +239,7 @@ function CreateAccount() {
                                 type="text"
                                 value={address}
                                 onChange={e => setAddress(e.target.value)}
+                                required
                             />
                             <Label for="address">
                                 Address
@@ -234,6 +254,7 @@ function CreateAccount() {
                                 type="city"
                                 value={addressCity}
                                 onChange={e => setAddressCity(e.target.value)}
+                                required
                             />
                             <Label for="City">
                                 City
@@ -248,6 +269,7 @@ function CreateAccount() {
                                 type="text"
                                 value={addressState}
                                 onChange={e => setAddressState(e.target.value)}
+                                required
                             />
                             <Label for="addressState">
                                 State
@@ -262,6 +284,7 @@ function CreateAccount() {
                                 type="text"
                                 value={addressZip}
                                 onChange={e => setAddressZip(e.target.value)}
+                                required
                             />
                             <Label for="addressZip">
                                 Zip
@@ -278,6 +301,7 @@ function CreateAccount() {
                                 type="tel"
                                 value={phone}
                                 onChange={e => setPhone(e.target.value)}
+                                required
                             />
                             <Label for="phone">
                                 Phone
@@ -292,6 +316,7 @@ function CreateAccount() {
                                 type="email"
                                 value={email}
                                 onChange={e => setEmail(e.target.value)}
+                                required
                             />
                             <Label for="exampleEmail">
                                 Email
@@ -328,6 +353,7 @@ function CreateAccount() {
                                 type="date"
                                 value={dob}
                                 onChange={e => setDob(e.target.value)}
+                                required
                             />
                             <Label for="dob">
                                 DOB
@@ -375,7 +401,7 @@ function CreateAccount() {
                     <h3>Professional Information</h3>
                 </Row>
                 <Row>
-                    <Col>
+                    <Col md={4}>
                         <FormGroup floating>
                             <Input
                                 id="jobTitle"
@@ -383,15 +409,14 @@ function CreateAccount() {
                                 type="text"
                                 value={jobTitle}
                                 onChange={e => setJobTitle(e.target.value)}
+                                required
                             />
                             <Label for="jobTitle">
                                 Job Title
                             </Label>
                         </FormGroup>
                     </Col>
-                </Row>
-                <Row>
-                    <Col>
+                    <Col md={4}>
                         <FormGroup floating>
                             <Input
                                 id="schools"
@@ -399,15 +424,14 @@ function CreateAccount() {
                                 type="text"
                                 value={schools}
                                 onChange={e => setSchools(e.target.value)}
+                                required
                             />
                             <Label for="schools">
                                 Schools
                             </Label>
                         </FormGroup>
                     </Col>
-                </Row>
-                <Row>
-                    <Col>
+                    <Col md={4}>
                         <FormGroup floating>
                             <Input
                                 id="degrees"
@@ -415,6 +439,7 @@ function CreateAccount() {
                                 type="text"
                                 value={degrees}
                                 onChange={e => setDegrees(e.target.value)}
+                                required
                             />
                             <Label for="degrees">
                                 Degrees
@@ -431,6 +456,7 @@ function CreateAccount() {
                                 type="text"
                                 value={licenseNumber}
                                 onChange={e => setLicenseNumber(e.target.value)}
+                                required
                             />
                             <Label for="licenseNumber">
                                 RN/MD License #
@@ -445,6 +471,7 @@ function CreateAccount() {
                                 type="date"
                                 value={licenseExpiration}
                                 onChange={e => setLicenseExpiration(e.target.value)}
+                                required
                             />
                             <Label for="licenseExpiration">
                                 License Expiration
@@ -504,6 +531,7 @@ function CreateAccount() {
                         type="select"
                         value={practiceSetting}
                         onChange={e => setPracticeSetting(e.target.value)}
+                        required
                     >
                         <option value={""}>--Please choose an option--</option>
                         <option value={"hospital"}>Hospital</option>
@@ -569,6 +597,7 @@ function CreateAccount() {
                                     setMembershipType('');
                                     setMembershipExpiration('');
                                 }}
+                                required
                             >
                                 <option value={""}>--Choose option--</option>
                                 <option value={"new member"}>New Member</option>
@@ -590,6 +619,7 @@ function CreateAccount() {
                                         type="select"
                                         value={membershipType}
                                         onChange={e => setMembershipType(e.target.value)}
+                                        required
                                     >
                                         <option value={""}>--Choose option--</option>
                                         <option value={"regular member 1yr"}>Regular Member ($85/1yr)</option>
@@ -616,6 +646,7 @@ function CreateAccount() {
                                         type="date"
                                         value={membershipExpiration}
                                         onChange={e => setMembershipExpiration(e.target.value)}
+                                        required
                                     />
                                     <Label for="membershipTypeExpiration">
                                         Current Membership Expiration

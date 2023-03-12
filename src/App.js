@@ -1,7 +1,7 @@
 
 import './App.css';
-import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route, useNavigate, Link, Redirect } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import About from './Pages/About';
@@ -19,13 +19,14 @@ import Donate from './Pages/Donate';
 import Committees from './Pages/Committees';
 import RecognitionsAwards from './Pages/RecognitionsAwards';
 
-import { auth } from './firebase';
+import { auth, db } from './firebase';
 // redux shit
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from './redux/slices/user';
 import Account from './Pages/Account';
 import CreateAccount from './Pages/CreateAccount';
 import MembershipPayment from './Pages/MembershipPayment';
+import ErrorPage from './Pages/ErrorPage';
 
 function App() {
   // redux shit
@@ -96,6 +97,7 @@ function App() {
           <Route path="/account" element={<Account />} />
           <Route path="/create-account" element={<CreateAccount />} />
           <Route path="/membership-payment" element={<MembershipPayment />} />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
         <Footer />
       </BrowserRouter>
