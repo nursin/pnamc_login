@@ -46,14 +46,9 @@ function Home() {
 
     useEffect(() => {
         if (userInfo[0]?.user.has_app_on_file === false) {
-            console.log("User", userInfo[0]?.user)
             navigate('/create-account')
         } else if (userInfo[0]?.user.has_paid_membership === false) {
-            console.log("User", userInfo[0]?.user)
             navigate('/membership-payment')
-        } else {
-            console.log("none")
-            console.log("User", userInfo[0]?.user.has_app_on_file)
         }
     }, [userInfo])
 

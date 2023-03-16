@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { auth, googleAuthProvider, actionCodeSettings } from '../firebase';
 import firebase from 'firebase';
+import no_image from "../empty_profile.jpeg"
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
@@ -48,9 +49,9 @@ function SigninModal() {
 
     return (
         <>
-            <Button outline className='navbar__signin text-md-center fw-bold mx-2 py-1'
+            <Button className='navbar__signin text-md-center fw-bold mx-3 p-0'
                 onClick={() => setIsSigninModalOpen(isSigninModalOpen ? false : true)}
-            >Login<FontAwesomeIcon icon="fa-regular fa-right-to-bracket" /></Button>
+            ><img src={no_image} className="profileAvatar-noImage"/></Button>
             <Modal
                 className='createWurker__modal'
                 size="sm"
