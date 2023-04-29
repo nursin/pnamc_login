@@ -30,7 +30,7 @@ import ErrorPage from './Pages/ErrorPage';
 
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js';
-const promise = loadStripe('pk_live_51JYEXdBXcG2jvy6vyRVjj3OAvZy9GZ1Hpa87EX34I5Gq0QFyaKcUdBLLfFlYYExdCNB1HBowg87ztJHcdsSjjjFB00nj9IRUQc');
+const promise = loadStripe('pk_test_51Kcm9tHU908PN1EPN0qUDY57lBBSrsWEDS1Lw4TM22jtTVDcBk8mRLVCbTjFm10r0jfE96VMm4q6coXy8BlF2AQL00fXpkdkwq');
 
 function App() {
   // redux shit
@@ -82,7 +82,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        {/* <UnderConstruction /> */}
+        <UnderConstruction />
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />

@@ -3,6 +3,7 @@ import pnamc_logo from '../PNAMC_chapter_logo_transparent.png';
 import { Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, Collapse } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 import ProfileAvatar from './ProfileAvatar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function Header() {
     const [isOpen, setIsOpen] = useState(false);
