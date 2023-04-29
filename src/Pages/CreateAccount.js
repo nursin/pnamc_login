@@ -64,8 +64,6 @@ function CreateAccount() {
     //    }
     // }
 
-
-
     const handleCreateMember = () => {
         const uploadTask = storage.ref(`member-images/${user.uid}`).put(imageFile);
         // progress bar function
@@ -381,7 +379,7 @@ function CreateAccount() {
                         </FormGroup>
                     </Col>
                 </Row>
-                <Row>
+                {/* <Row>
                     <Col>
                         <FormGroup floating>
                             <Input
@@ -395,7 +393,7 @@ function CreateAccount() {
                             </Label>
                         </FormGroup>
                     </Col>
-                </Row>
+                </Row> */}
                 <hr />
                 <Row>
                     <h3>Professional Information</h3>

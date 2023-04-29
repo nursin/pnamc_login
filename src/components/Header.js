@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import pnaa_logo from '../PNAA_logo.png';
 import pnamc_logo from '../PNAMC_chapter_logo_transparent.png';
 import { Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, Collapse } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
@@ -42,12 +41,10 @@ function Header() {
                         <NavItem><NavLink onClick={() => setIsOpen(false)} to='/membership'>Membership</NavLink></NavItem>
                         <NavItem><NavLink onClick={() => setIsOpen(false)} to='/donate'>Donate</NavLink></NavItem>
                         {/* <NavItem onClick={() => setIsOpen(false)} className='d-xl-none'><SigninModal /></NavItem> */}
-                        <img src={pnaa_logo} className="navbar-logo-expanded d-xl-none" alt="PNAA logo" />
                     </Nav>
                 </Collapse>
                 <div className='d-none d-xl-block'>
                     <ProfileAvatar />
-                    <img src={pnaa_logo} className="navbar-logo-right ms-2" alt="PNAA logo" />
                 </div>
             </Navbar>
         </nav>

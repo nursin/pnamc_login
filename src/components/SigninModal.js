@@ -103,6 +103,7 @@ function SigninModal() {
                     >
                         Apply at PNAA.org
                     </a>
+                    <p className='alt-text mx-auto cursor'>Multi-member Payment</p>
                 </ModalBody>
             </Modal>
         </>

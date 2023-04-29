@@ -42,8 +42,9 @@ function Account() {
     }
   }, [userInfo])
 
-  console.log("user", userInfo)
-  console.log("user app", userApplication)
+  // console.log("user", userInfo)
+  // console.log("user app", userApplication)
+
   return (
     <Container>
       <Row className='text-center my-2'>
@@ -52,11 +53,33 @@ function Account() {
       {/* // account info - application data, login info, ability to edit */}
       <div className='account__card round mb-4'>
         <Row className='mb-2'>
-          <h3>Account Info</h3>
+          <div className="d-flex justify-content-between">
+            <h3>Account Info</h3>
+            <Button className="round">Edit</Button>
+          </div>
         </Row>
         <Row className='my-2'>
-          <Col className='p-4'>
-            <p className='text-black fw-normal'>{userApplication[0]?.user.address}</p>
+          <Col>
+            <p className='text-black fw-normal m-0'>{userApplication[0]?.user.first_name} {userApplication[0]?.user.middle_name} {userApplication[0]?.user.last_name}</p>
+            <p className='text-black fw-normal m-0'>{userApplication[0]?.user.address}</p>
+            <p className='text-black fw-normal m-0'>{userApplication[0]?.user.address_city} {userApplication[0]?.user.address_state} {userApplication[0]?.user.address_zip}</p>
+            <p className='text-black fw-normal m-0'>{userApplication[0]?.user.phone}</p>
+            <p className='text-black fw-normal m-0'>{userApplication[0]?.user.email}</p>
+            <p className='text-black fw-normal m-0'>{userApplication[0]?.user.dob}</p>
+            <p className='text-black fw-normal m-0'>{userApplication[0]?.user.preferred_contact}</p>
+            <p className='text-black fw-normal m-0'>{userApplication[0]?.user.gender}</p>
+          </Col>
+          <Col>
+            <p className='text-black fw-normal m-0'>{userApplication[0]?.user.job_title}</p>
+            <p className='text-black fw-normal m-0'>{userApplication[0]?.user.schools}</p>
+            <p className='text-black fw-normal m-0'>{userApplication[0]?.user.degrees}</p>
+            <p className='text-black fw-normal m-0'>{userApplication[0]?.user.license_number}</p>
+            <p className='text-black fw-normal m-0'>{userApplication[0]?.user.license_expiration}</p>
+            <p className='text-black fw-normal m-0'>{userApplication[0]?.user.certs}</p>
+            <p className='text-black fw-normal m-0'>{userApplication[0]?.user.certs_issuer}</p>
+            <p className='text-black fw-normal m-0'>{userApplication[0]?.user.certs_expiration}</p>
+            <p className='text-black fw-normal m-0'>{userApplication[0]?.user.practice_setting}</p>
+            <p className='text-black fw-normal m-0'>{userApplication[0]?.user.practice_setting_other}</p>
           </Col>
         </Row>
       </div>
@@ -64,11 +87,15 @@ function Account() {
       {/* // membership type, status, price */}
       <div className='account__card round mb-4'>
         <Row className='mb-2'>
-          <h3>Membership</h3>
+          <div className="d-flex justify-content-between">
+            <h3>Membership</h3>
+            <Button className="round">Renew</Button>
+          </div>
         </Row>
         <Row className='my-2'>
-          <Col className='p-4'>
-            <p className='text-black fw-normal mb-4'>{userApplication[0]?.user.membership_type}</p>
+          <Col>
+            <p className='text-black fw-normal m-0'>{userApplication[0]?.user.membership_type}</p>
+            <p className='text-black fw-normal m-0'>{userApplication[0]?.user.membership_expiration}</p>
           </Col>
         </Row>
       </div>
@@ -79,7 +106,7 @@ function Account() {
           <h3>Transactions</h3>
         </Row>
         <Row className='my-2'>
-          <Col className='p-4'>
+          <Col>
             <p className='text-black fw-normal'>no transactions</p>
           </Col>
         </Row>
@@ -91,7 +118,7 @@ function Account() {
           <h3>Events</h3>
         </Row>
         <Row className='my-2'>
-          <Col className='p-4'>
+          <Col>
             <p className='text-black fw-normal'>no events</p>
           </Col>
         </Row>

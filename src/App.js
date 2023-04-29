@@ -28,6 +28,10 @@ import CreateAccount from './Pages/CreateAccount';
 import MembershipPayment from './Pages/MembershipPayment';
 import ErrorPage from './Pages/ErrorPage';
 
+import { loadStripe } from '@stripe/stripe-js'
+import { Elements } from '@stripe/react-stripe-js';
+const promise = loadStripe('pk_live_51JYEXdBXcG2jvy6vyRVjj3OAvZy9GZ1Hpa87EX34I5Gq0QFyaKcUdBLLfFlYYExdCNB1HBowg87ztJHcdsSjjjFB00nj9IRUQc');
+
 function App() {
   // redux shit
   const { user } = useSelector((state) => state.user);
@@ -96,7 +100,11 @@ function App() {
           <Route path="/donate" element={<Donate />} />
           <Route path="/account" element={<Account />} />
           <Route path="/create-account" element={<CreateAccount />} />
-          <Route path="/membership-payment" element={<MembershipPayment />} />
+          <Route path="/membership-payment" element={
+            <Elements stripe={promise}>
+              <MembershipPayment />
+            </Elements>
+          } />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
         <Footer />

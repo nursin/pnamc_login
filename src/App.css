@@ -39,6 +39,10 @@ a:link {
   border-radius: 2rem;
 }
 
+.cursor {
+  cursor: pointer;
+}
+
 .round-top {
   border-top-left-radius: 2rem;
   border-top-right-radius: 2rem;
@@ -467,6 +471,28 @@ img.navbar-logo-right {
 .account__card {
   background-color: rgb(218, 218, 218);
   padding: 1rem;
+}
+
+/* Membership Payment */
+.productCard {
+  width: 12rem;
+  border: solid 10px #083d74;
+}
+
+.membershipPayment__row:hover {
+  background-color: #c8cacb;
+  cursor: pointer;
+}
+
+.membershipPayment__right {
+  min-height: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.membershipPayment__right > :first-child {
+  margin-bottom: 5rem;
 }
 
 /* footer */
