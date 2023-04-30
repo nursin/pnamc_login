@@ -1,7 +1,7 @@
 
 import './App.css';
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route, useNavigate, Link, Redirect } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import About from './Pages/About';
@@ -82,7 +82,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <UnderConstruction />
+        {/* <UnderConstruction /> */}
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />

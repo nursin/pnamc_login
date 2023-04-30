@@ -475,7 +475,7 @@ img.navbar-logo-right {
 
 /* Membership Payment */
 .membershipPayment {
-  min-height: 37rem;
+  min-height: 39rem;
 }
 
 .productCard {
@@ -494,12 +494,17 @@ img.navbar-logo-right {
   flex-direction: column;
   justify-content: center;
   background-color: rgb(254, 249, 234);
-  border-radius: 1rem;
-  border: solid 2px blue;
+  box-shadow: -5px 0 10px rgb(0 0 0 / 0.2);
+  position: relative;
 }
 
 .membershipPayment__right > :first-child {
   margin-bottom: 5rem;
+}
+
+.membershipPayment__right > :last-child {
+  position: absolute;
+  bottom: 0;
 }
 
 /* footer */
