@@ -31,8 +31,8 @@ function MembershipPayment() {
     const getClientSecret = async () => {
       const response = await axios({
         method: 'post',
-        //stripe expects the total in a currencies subunits 10 dollars is 10000 cents times by 100 to get usd subcurrency
-        url: `/payments/create?total=${membershipTotal * 100}`
+        //stripe expects the total in a currencies subunits 10 dollars is 1000 cents times by 100 to get usd subcurrency
+        url: `/payments/create?total=${membershipTotal.toFixed(2)*100}`
       });
       setClientSecret(response.data.clientSecret)
     }
@@ -40,6 +40,8 @@ function MembershipPayment() {
     setError(null)
   }, [membershipTotal])
 
+  console.log(clientSecret)
+  console.log(membershipTotal.toFixed(2)*100)
   useEffect(() => {
     if (membershipType === "regular member 1 year - $85") {
       setMembershipTotal(85 * 1.04 + 0.30)
@@ -88,6 +90,7 @@ function MembershipPayment() {
       }
     }).then(({ paymentIntent }) => {
       //paymentintent = payment confirmation
+
       db
         .collection('users')
         .doc(user.uid)
@@ -96,22 +99,22 @@ function MembershipPayment() {
         .set({
           product_type: "membership",
           product_name: membershipType,
-          product_price: membershipTotal - processingFee,
-          processing_fee: processingFee,
-          total_paid: paymentIntent.amount,
-          created: paymentIntent.created
+          product_price: Number((membershipTotal - processingFee).toFixed(2)),
+          processing_fee: Number((processingFee).toFixed(2)),
+          total_paid: paymentIntent.amount/100,
+          created: paymentIntent.created,
         })
 
-      db
-        .collection("users")
-        .doc(user.uid)
-        .set({
-          has_paid_membership: true
-        },
-          {
-            merge: true
-          }
-        )
+      // db
+      //   .collection("users")
+      //   .doc(user.uid)
+      //   .set({
+      //     has_paid_membership: true
+      //   },
+      //     {
+      //       merge: true
+      //     }
+      //   )
 
       setSucceeded(true);
       setError(null);
