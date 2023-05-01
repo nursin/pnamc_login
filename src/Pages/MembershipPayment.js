@@ -88,7 +88,7 @@ function MembershipPayment() {
       }
     }).then(({ paymentIntent }) => {
       //paymentintent = payment confirmation
-
+      console.log(paymentIntent);
       db
         .collection('users')
         .doc(user.uid)
