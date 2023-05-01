@@ -5,6 +5,7 @@ import { Button, Row, Container, Col, FormGroup, Input, Label, Form } from "reac
 import { db } from '../firebase'
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import axios from '../axios';
+import firebase from 'firebase';
 
 function MembershipPayment() {
   // redux
@@ -32,7 +33,7 @@ function MembershipPayment() {
       const response = await axios({
         method: 'post',
         //stripe expects the total in a currencies subunits 10 dollars is 1000 cents times by 100 to get usd subcurrency
-        url: `/payments/create?total=${membershipTotal.toFixed(2)*100}`
+        url: `/payments/create?total=${membershipTotal.toFixed(2) * 100}`
       });
       setClientSecret(response.data.clientSecret)
     }
@@ -40,8 +41,6 @@ function MembershipPayment() {
     setError(null)
   }, [membershipTotal])
 
-  console.log(clientSecret)
-  console.log(membershipTotal.toFixed(2)*100)
   useEffect(() => {
     if (membershipType === "regular member 1 year - $85") {
       setMembershipTotal(85 * 1.04 + 0.30)
@@ -79,7 +78,6 @@ function MembershipPayment() {
 
   const handleSubmitCredit = async (e) => {
     // do all the fancy stripe stuff
-    console.log("credit processing")
     e.preventDefault();
     setProcessing(true);
 
@@ -95,26 +93,56 @@ function MembershipPayment() {
         .collection('users')
         .doc(user.uid)
         .collection('transactions')
-        .doc(paymentIntent.id)
+        .doc()
         .set({
+          auth_uid: user.uid,
+          stripe_tx_id: paymentIntent.id,
           product_type: "membership",
           product_name: membershipType,
           product_price: Number((membershipTotal - processingFee).toFixed(2)),
           processing_fee: Number((processingFee).toFixed(2)),
-          total_paid: paymentIntent.amount/100,
+          total_paid: paymentIntent.amount / 100,
           created: paymentIntent.created,
         })
 
-      // db
-      //   .collection("users")
-      //   .doc(user.uid)
-      //   .set({
-      //     has_paid_membership: true
-      //   },
-      //     {
-      //       merge: true
-      //     }
-      //   )
+      db
+        .collection("users")
+        .doc(user.uid)
+        .set({
+          has_paid_membership: true,
+          membership_type: membershipType,
+          membership_exp: firebase.firestore.FieldValue.serverTimestamp(),
+        },
+          {
+            merge: true
+          }
+        )
+
+      db
+        .collection("users-applications")
+        .doc(user.uid)
+        .set({
+          membership_type: membershipType,
+          membership_expiration: firebase.firestore.FieldValue.serverTimestamp(),
+        },
+          {
+            merge: true
+          }
+        )
+
+      db
+        .collection('users-transactions')
+        .doc()
+        .set({
+          auth_uid: user.uid,
+          stripe_tx_id: paymentIntent.id,
+          product_type: "membership",
+          product_name: membershipType,
+          product_price: Number((membershipTotal - processingFee).toFixed(2)),
+          processing_fee: Number((processingFee).toFixed(2)),
+          total_paid: paymentIntent.amount / 100,
+          created: paymentIntent.created,
+        })
 
       setSucceeded(true);
       setError(null);
@@ -136,6 +164,7 @@ function MembershipPayment() {
     }
   }
 
+  // console.log(membershipType)
   // useEffect(() => {
   //   console.log(membershipType)
   // }, [membershipType])
@@ -291,20 +320,20 @@ function MembershipPayment() {
               </FormGroup>
             </Col>
             <Col className='membershipPayment__right mx-2 d-flex justify-content-center align-items-center'>
-                <h3 className='text-center'>{membershipType ? membershipType?.toUpperCase() : "Select a membership"}</h3>
-                <CardElement onChange={handleChange} className='border p-3 rounded bg-white w-50' />
-                <div className='d-flex justify-content-between mt-3 w-50'>
-                  <div>
-                    <p className='text-black fw-normal m-0'>Processing fee (4%+$0.30): ${processingFee.toFixed(2)}</p>
-                    <h3>Total: ${membershipTotal.toFixed(2)}</h3>
-                  </div>
-                  <div>
-                    <Button disabled={processing || disabled || succeeded} className='me-auto membership__formButton fw-bold'>{processing ? "Processing" : 'Pay Now'}</Button>
-                  </div>
+              <h3 className='text-center'>{membershipType ? membershipType?.toUpperCase() : "Select a membership"}</h3>
+              <CardElement onChange={handleChange} className='border p-3 rounded bg-white w-50' />
+              <div className='d-flex justify-content-between mt-3 w-50'>
+                <div>
+                  <p className='text-black fw-normal m-0'>Processing fee (4%+$0.30): ${processingFee.toFixed(2)}</p>
+                  <h3>Total: ${membershipTotal.toFixed(2)}</h3>
                 </div>
-                {/* Errors */}
-                {error && <div>{error}</div>}
-                <h6 className='mt-5'>If you want to pay another way, logout, and contact PNAMC president.</h6>
+                <div>
+                  <Button disabled={processing || disabled || succeeded} className='me-auto membership__formButton fw-bold'>{processing ? "Processing" : 'Pay Now'}</Button>
+                </div>
+              </div>
+              {/* Errors */}
+              {error && <div>{error}</div>}
+              <h6 className='mt-5'>If you want to pay another way, logout, and contact PNAMC president.</h6>
             </Col>
           </Row>
         </Form>

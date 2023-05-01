@@ -37,11 +37,22 @@ function CreateAccount() {
     const [membershipExpiration, setMembershipExpiration] = useState('');
     const [imageFile, setImageFile] = useState('');
     const [progress, setProgress] = useState(0);
+
     const [error, setError] = useState("")
+    const [processing, setProcessing] = useState('');
+    const [disabled, setDisabled] = useState(true);
+
     // redux
     const { user } = useSelector((state) => state.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const handleChange = e => {
+        // Listen for changes in CardElement
+        // and display any errors as the customer types their card detaiLS
+        setDisabled(e.empty);
+        setError(e.error ? e.error.message : '')
+    }
 
     const handleImage = (e) => {
         if (e.target.files[0]) {
@@ -64,7 +75,9 @@ function CreateAccount() {
     //    }
     // }
 
-    const handleCreateMember = () => {
+    const handleCreateMember = (e) => {
+        e.preventDefault();
+
         const uploadTask = storage.ref(`member-images/${user.uid}`).put(imageFile);
         // progress bar function
         uploadTask.on(
@@ -155,20 +168,35 @@ function CreateAccount() {
                     })
             }
         )
-        db
-            .collection("users")
-            .doc(user.uid)
-            .set({
-                has_app_on_file: true
-            },
-                {
-                    merge: true
-                }
-            )
+
         if (membership === 'existing member') {
+            db
+                .collection("users")
+                .doc(user.uid)
+                .set({
+                    has_app_on_file: true,
+                    has_paid_membership: true,
+                    membership_exp: membershipExpiration,
+                    membership_type: membershipType,
+                },
+                    {
+                        merge: true
+                    }
+                )
             setMembership('');
             navigate('/account');
         } else {
+            db
+                .collection("users")
+                .doc(user.uid)
+                .set({
+                    has_app_on_file: true,
+                    membership_exp: membershipExpiration,
+                },
+                    {
+                        merge: true
+                    }
+                )
             setMembership('');
             navigate('/membership-payment');
         }
@@ -184,7 +212,7 @@ function CreateAccount() {
             <Row>
                 <h3>Personal Information</h3>
             </Row>
-            <Form>
+            <Form onSubmit={handleCreateMember}>
                 <Row>
                     <Col md={4}>
                         <FormGroup floating>
@@ -653,7 +681,7 @@ function CreateAccount() {
                             </Col>
                             <Col md={12} className='text-center'>
                                 <Button
-                                    onClick={handleCreateMember}
+                                // onClick={handleCreateMember}
                                 >
                                     Submit
                                 </Button>
@@ -662,7 +690,7 @@ function CreateAccount() {
                         :
                         <Col md={12} className='text-center'>
                             <Button
-                                onClick={handleCreateMember}
+                            // onClick={handleCreateMember}
                             >
                                 Next
                             </Button>
