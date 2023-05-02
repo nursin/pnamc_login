@@ -37,6 +37,7 @@ function CreateAccount() {
     const [membershipExpiration, setMembershipExpiration] = useState('');
     const [imageFile, setImageFile] = useState('');
     const [progress, setProgress] = useState(0);
+    const [userInfo, setUserInfo] = useState('');
 
     const [error, setError] = useState("")
     const [processing, setProcessing] = useState('');
@@ -46,6 +47,29 @@ function CreateAccount() {
     const { user } = useSelector((state) => state.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        db
+            .collection('users')
+            .where('auth_uid', '==', `${user?.uid}`)
+            .onSnapshot(snapshot => {
+                setUserInfo(snapshot.docs.map(doc => ({
+                    id: doc.id,
+                    user: doc.data()
+                })));
+            })
+
+    }, [user])
+
+    useEffect(() => {
+        if (userInfo[0]?.user.has_app_on_file === false) {
+            navigate('/create-account')
+        } else if (userInfo[0]?.user.has_paid_membership === false) {
+            navigate('/membership-payment')
+        } else if (!user) {
+            navigate('/')
+        }
+    }, [])
 
     const handleChange = e => {
         // Listen for changes in CardElement

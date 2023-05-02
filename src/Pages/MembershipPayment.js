@@ -16,6 +16,7 @@ function MembershipPayment() {
   const [membershipType, setMembershipType] = useState();
   const [membershipTotal, setMembershipTotal] = useState(0.00);
   const [processingFee, setProcessingFee] = useState(0.00);
+  const [userInfo, setUserInfo] = useState('');
 
   //stripe payment
   const stripe = useStripe();
@@ -26,6 +27,27 @@ function MembershipPayment() {
   const [error, setError] = useState(null);
   const [disabled, setDisabled] = useState(true);
   const [clientSecret, setClientSecret] = useState(true);
+
+  useEffect(() => {
+    db
+      .collection('users')
+      .where('auth_uid', '==', `${user?.uid}`)
+      .onSnapshot(snapshot => {
+        setUserInfo(snapshot.docs.map(doc => ({
+          id: doc.id,
+          user: doc.data()
+        })));
+      })
+
+    if (userInfo[0]?.user.has_app_on_file === false) {
+      navigate('/create-account')
+    } else if (userInfo[0]?.user.has_paid_membership === false) {
+      navigate('/membership-payment')
+    } else if (!user) {
+      navigate('/')
+    }
+
+  }, [user])
 
   useEffect(() => {
     // generate the special stripe secret which allows us to charge customer
@@ -88,7 +110,10 @@ function MembershipPayment() {
       }
     }).then(({ paymentIntent }) => {
       //paymentintent = payment confirmation
-
+      if (paymentIntent === undefined) {
+        setProcessing(false)
+        setError("Unknown Error: Check card details")
+      }
       db
         .collection('users')
         .doc(user.uid)
