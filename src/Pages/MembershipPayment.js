@@ -88,7 +88,7 @@ function MembershipPayment() {
       }
     }).then(({ paymentIntent }) => {
       //paymentintent = payment confirmation
-      console.log(paymentIntent);
+
       db
         .collection('users')
         .doc(user.uid)
@@ -152,6 +152,7 @@ function MembershipPayment() {
   }
 
   const handleChange = e => {
+    // if (cardElementError._complete=false) {return}
     // Listen for changes in CardElement
     // and display any errors as the customer types their card detaiLS
     if (membershipTotal * 100 === 0) {
@@ -159,22 +160,17 @@ function MembershipPayment() {
     } else if (membershipTotal * 100 > 20001) {
       setError("Order total too high")
     } else {
-      setDisabled(e.empty);
+      setDisabled(!e.complete);
       setError(e.error ? e.error.message : '')
     }
   }
 
-  // console.log(membershipType)
-  // useEffect(() => {
-  //   console.log(membershipType)
-  // }, [membershipType])
-
   return (
     <div>
-      <Container fluid className="g-0">
+      <Container fluid className="">
         <Form onSubmit={handleSubmitCredit}>
           <Row className='membershipPayment'>
-            <Col className='d-flex justify-content-center align-items-center' md={6}>
+            <Col className='membershipPayment__left d-flex justify-content-center align-items-center' md={6}>
               <FormGroup tag="fieldset">
                 <h3>Select a Membership</h3>
                 <FormGroup check className='mb-1'>
@@ -319,10 +315,12 @@ function MembershipPayment() {
                 </FormGroup>
               </FormGroup>
             </Col>
-            <Col className='membershipPayment__right mx-2 d-flex justify-content-center align-items-center'>
+            <Col className='membershipPayment__right d-flex justify-content-center align-items-center'>
               <h3 className='text-center'>{membershipType ? membershipType?.toUpperCase() : "Select a membership"}</h3>
-              <CardElement onChange={handleChange} className='border p-3 rounded bg-white w-50' />
-              <div className='d-flex justify-content-between mt-3 w-50'>
+              {/* Errors */}
+              {error && <div className='text-danger'>{error}</div>}
+              <CardElement onChange={handleChange} className='membershipPayment__cardElement border p-3 rounded bg-white' />
+              <div className='membershipPayment__cardDetails d-flex justify-content-between mt-3'>
                 <div>
                   <p className='text-black fw-normal m-0'>Processing fee (4%+$0.30): ${processingFee.toFixed(2)}</p>
                   <h3>Total: ${membershipTotal.toFixed(2)}</h3>
@@ -331,9 +329,7 @@ function MembershipPayment() {
                   <Button disabled={processing || disabled || succeeded} className='me-auto membership__formButton fw-bold'>{processing ? "Processing" : 'Pay Now'}</Button>
                 </div>
               </div>
-              {/* Errors */}
-              {error && <div>{error}</div>}
-              <h6 className='mt-5'>If you want to pay another way, logout, and contact PNAMC president.</h6>
+              <h6 className='text-center'>If you want to pay another way, logout, and contact PNAMC president.</h6>
             </Col>
           </Row>
         </Form>

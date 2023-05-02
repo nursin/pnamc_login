@@ -488,8 +488,12 @@ img.navbar-logo-right {
   cursor: pointer;
 }
 
+.membershipPayment__left {
+  min-height: 30rem;
+}
+
 .membershipPayment__right {
-  min-height: 5rem;
+  min-height: 30rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -500,11 +504,20 @@ img.navbar-logo-right {
 
 .membershipPayment__right > :first-child {
   margin-bottom: 5rem;
+  margin-top: -5rem;
 }
 
 .membershipPayment__right > :last-child {
   position: absolute;
   bottom: 0;
+}
+
+.membershipPayment__cardElement {
+  width: 60%;
+}
+
+.membershipPayment__cardDetails {
+  width: 60%;
 }
 
 /* footer */
@@ -579,6 +592,12 @@ footer {
   .navbar__joinNow:hover {
     background-color: none;
     color: none;
+  }
+  .membershipPayment__cardElement {
+    width: 100%;
+  }
+  .membershipPayment__cardDetails {
+    width: 100%;
   }
 }
 
