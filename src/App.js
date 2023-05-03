@@ -30,6 +30,7 @@ import ErrorPage from './Pages/ErrorPage';
 
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js';
+import Sitemap from './Pages/Sitemap';
 const promise = loadStripe('pk_test_51Kcm9tHU908PN1EPN0qUDY57lBBSrsWEDS1Lw4TM22jtTVDcBk8mRLVCbTjFm10r0jfE96VMm4q6coXy8BlF2AQL00fXpkdkwq');
 
 function App() {
@@ -105,6 +106,8 @@ function App() {
               <MembershipPayment />
             </Elements>
           } />
+          {/* Redirects */}
+          {/* <Route path="/community-outreach-events" element={<Committees />} /> */}
           <Route path="*" element={<ErrorPage />} />
         </Routes>
         <Footer />
