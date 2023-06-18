@@ -659,7 +659,7 @@ function CreateAccount() {
                             </Label>
                         </FormGroup>
                     </Col>
-                    {membership === "existing member" ?
+                    {membership === "existing member" || membership === "renewal" ?
                         <>
                             <Col md={4}>
                                 <FormGroup floating>
@@ -703,13 +703,24 @@ function CreateAccount() {
                                     </Label>
                                 </FormGroup>
                             </Col>
-                            <Col md={12} className='text-center'>
-                                <Button
-                                // onClick={handleCreateMember}
-                                >
-                                    Submit
-                                </Button>
-                            </Col>
+                            {membership === "renewal"
+                                ?
+                                <Col md={12} className='text-center'>
+                                    <Button
+                                    // onClick={handleCreateMember}
+                                    >
+                                        Next
+                                    </Button>
+                                </Col>
+                                :
+                                <Col md={12} className='text-center'>
+                                    <Button
+                                    // onClick={handleCreateMember}
+                                    >
+                                        Submit
+                                    </Button>
+                                </Col>}
+
                         </>
                         :
                         <Col md={12} className='text-center'>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import Contact from '../components/Contact'
+import ImageSlider from '../components/ImageSlider'
 import MyCarousel from '../components/MyCarousel'
 import Promo from '../components/Promo'
 import { db } from '../firebase'
@@ -57,12 +58,10 @@ function Home() {
         <div className='home'>
             <MyCarousel />
             <Promo title={aboutusTitle} text={aboutusText} image={aboutusImage} order={true} />
-            <hr className='mx-5 my-5' />
             <Promo title={presidentMessageIntroTitle} text={presidentMessageIntroText} image={presidentMessageIntroImage} buttonTitle="Read more" buttonLink='/presidents-message' order={false} />
-            <hr className='mx-5 my-5' />
             <Promo title={eventGalaTitle} text={eventGalaText} video={"dalOhI18JJU"} order={true} />
-            <hr className='mx-5 my-5' />
             <Promo title={medicalMissionTitle} text={medicalMissionText} slideShowImages={medicalMissionSlideShowImages} buttonTitle="Read more" buttonLink='https://drive.google.com/drive/folders/1EqqNFPWd-uh2KXM0e7EGAVONI59Pc737?usp=share_link' order={false} />
+            <ImageSlider />
             <Contact />
         </div>
     )

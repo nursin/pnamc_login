@@ -364,6 +364,40 @@ img.navbar-logo-right {
   height: 30rem;
 }
 
+/* .imageSlider__container {
+  background-color: rgb(0, 247, 255);
+} */
+
+.imageSlider {
+  /* background-color: rgb(0, 247, 255); */
+  padding: 1rem;
+  --_space: 0.5rem;
+  display: grid;
+  gap: var(--_space);
+  grid-auto-flow: column;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  justify-content: start;
+}
+
+.imageSlider::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+
+.imageSlider::-webkit-scrollbar:horizontal {
+  height: 11px;
+}
+
+.imageSlider::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 2px solid rgb(255, 255, 255); /* should match background, can't be transparent */
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.imageSlider__card {
+  width: 20rem;
+}
+
 /* board of directors */
 
 .boardMemberCard {
@@ -545,9 +579,16 @@ footer {
 /* error page */
 .errorPage {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 70vh;
+}
+
+/* Admin page */
+
+.admin {
+  height: 75vh;
 }
 
 /* media queries */

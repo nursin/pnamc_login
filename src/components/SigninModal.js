@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Col, Input, Modal, ModalBody, ModalFooter, ModalHeader, Progress } from 'reactstrap';
+import { Button, Input, Modal, ModalBody, ModalHeader, Tooltip } from 'reactstrap';
 import pnamc_logo from '../PNAMC_chapter_logo_transparent.png';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
@@ -18,6 +18,9 @@ function SigninModal() {
     const [isSigninModalOpen, setIsSigninModalOpen] = useState(false);
     const [email, setEmail] = useState('');
     const navigate = useNavigate();
+
+    const [tooltipOpen, setTooltipOpen] = useState(false);
+    const toggle = () => setTooltipOpen(!tooltipOpen);
 
     const sendSignInLinkToEmail = () => {
         auth.sendSignInLinkToEmail(email, actionCodeSettings)
@@ -49,9 +52,12 @@ function SigninModal() {
 
     return (
         <>
-            <Button className='navbar__signin text-md-center fw-bold mx-3 p-0'
+            <Button className='navbar__signin text-md-center fw-bold mx-3 p-0' id="loginImage"
                 onClick={() => setIsSigninModalOpen(isSigninModalOpen ? false : true)}
-            ><img src={no_image} className="profileAvatar-noImage"/></Button>
+            ><img src={no_image} className="profileAvatar-noImage" /></Button>
+            <Tooltip placement="bottom" isOpen={tooltipOpen} target="loginImage" toggle={toggle}>
+                Click to login
+            </Tooltip>
             <Modal
                 className='createWurker__modal'
                 size="sm"
@@ -103,7 +109,6 @@ function SigninModal() {
                     >
                         Apply at PNAA.org
                     </a>
-                    <p className='alt-text mx-auto cursor'>Multi-member Payment</p>
                 </ModalBody>
             </Modal>
         </>
