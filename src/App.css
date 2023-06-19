@@ -11,6 +11,7 @@ body {
   height: 100vh;
   background-color: #ffffff;
   background-attachment: fixed;
+  font-family: var(--font-family)
 }
 
 h1,
@@ -588,7 +589,11 @@ footer {
 /* Admin page */
 
 .admin {
-  height: 75vh;
+  min-height: 75vh;
+}
+
+.tablet {
+  width: 12rem;
 }
 
 /* media queries */

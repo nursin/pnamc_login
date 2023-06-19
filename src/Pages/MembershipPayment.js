@@ -121,13 +121,15 @@ function MembershipPayment() {
         .doc()
         .set({
           auth_uid: user.uid,
+          user_name: user.display_name,
           stripe_tx_id: paymentIntent.id,
+          stripe_timestamp: paymentIntent.created,
           product_type: "membership",
           product_name: membershipType,
           product_price: Number((membershipTotal - processingFee).toFixed(2)),
           processing_fee: Number((processingFee).toFixed(2)),
           total_paid: paymentIntent.amount / 100,
-          created: paymentIntent.created,
+          created: firebase.firestore.FieldValue.serverTimestamp(),
         })
 
       db
@@ -160,13 +162,15 @@ function MembershipPayment() {
         .doc()
         .set({
           auth_uid: user.uid,
+          user_name: user.display_name,
           stripe_tx_id: paymentIntent.id,
+          stripe_timestamp: paymentIntent.created,
           product_type: "membership",
           product_name: membershipType,
           product_price: Number((membershipTotal - processingFee).toFixed(2)),
           processing_fee: Number((processingFee).toFixed(2)),
           total_paid: paymentIntent.amount / 100,
-          created: paymentIntent.created,
+          created: firebase.firestore.FieldValue.serverTimestamp(),
         })
 
       setSucceeded(true);
