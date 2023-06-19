@@ -1,32 +1,43 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { DataTable } from "primereact/datatable"
 import { Column } from "primereact/column"
 import { FilterMatchMode } from "primereact/api"
 import { InputText } from "primereact/inputtext"
 import { Button } from 'primereact/button';
-
+import moment from 'moment'
+import 'primeicons/primeicons.css';
 //theme
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 //core
 import "primereact/resources/primereact.min.css";
-import moment from 'moment'
 
-function FilterTable({tableTitle}) {
+
+function FilterTable({ data, tableTitle }) {
+    const [columns, setColumns] = useState();
+
     const [globalFilterValue, setGlobalFilterValue] = useState('');
     const [filters, setFilters] = useState({
         global: { value: null, matchMode: FilterMatchMode.CONTAINS }
     });
 
     const formatDate = (data) => {
-        return moment(data.created * 1000).format('M.D.YY')
+        return moment(data.created * 1000).format('MMM D, YYYY')
     }
 
     const formatCurrency = (value) => {
         return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
     };
 
-    const priceBodyTemplate = (data) => {
+    const totalPaidBodyTemplate = (data) => {
         return formatCurrency(data.total_paid);
+    };
+
+    const priceBodyTemplate = (data) => {
+        return formatCurrency(data.price);
+    };
+
+    const totalSalesBodyTemplate = (data) => {
+        return formatCurrency(data.total_sales);
     };
 
     const renderHeader = () => {
@@ -52,128 +63,47 @@ function FilterTable({tableTitle}) {
     };
 
 
-    const data = [
-        {
-            id: 1,
-            stripe_tx_id: "pi_3N3M0fHU908PN1EP1i7XjXIn",
-            user_name: "bobby keel",
-            product_type: "membership",
-            product_name: "regular member 2 year - $170",
-            created: 1683044701,
-            total_paid: 120.1
-        },
-        {
-            id: 2,
-            stripe_tx_id: "pi_3N3M0fHU908PN1EP1i7XjXIn",
-            user_name: "penelope forester",
-            product_type: "membership",
-            product_name: "regular member 1 year - $170",
-            created: 1687137163,
-            total_paid: 130.1
-        },
-        {
-            id: 3,
-            stripe_tx_id: "pi_3N3M0fHU908PN1EP1i7XjXIn",
-            user_name: "amy jerry",
-            product_type: "event",
-            product_name: "met gala",
-            created: 1700374352,
-            total_paid: 89.1
-        },
-        {
-            id: 4,
-            stripe_tx_id: "pi_3N3M0fHU908PN1EP1i7XjXIn",
-            user_name: "jerry porter",
-            product_type: "membership",
-            product_name: "regular member 2 year - $170",
-            created: 1683044701,
-            total_paid: 65.1
-        },
-        {
-            id: 1,
-            stripe_tx_id: "pi_3N3M0fHU908PN1EP1i7XjXIn",
-            user_name: "bobby keel",
-            product_type: "membership",
-            product_name: "regular member 2 year - $170",
-            created: 1683044701,
-            total_paid: 120.1
-        },
-        {
-            id: 2,
-            stripe_tx_id: "pi_3N3M0fHU908PN1EP1i7XjXIn",
-            user_name: "penelope forester",
-            product_type: "membership",
-            product_name: "regular member 1 year - $170",
-            created: 1687137163,
-            total_paid: 130.1
-        },
-        {
-            id: 3,
-            stripe_tx_id: "pi_3N3M0fHU908PN1EP1i7XjXIn",
-            user_name: "amy jerry",
-            product_type: "event",
-            product_name: "met gala",
-            created: 1700374352,
-            total_paid: 89.1
-        },
-        {
-            id: 4,
-            stripe_tx_id: "pi_3N3M0fHU908PN1EP1i7XjXIn",
-            user_name: "jerry porter",
-            product_type: "membership",
-            product_name: "regular member 2 year - $170",
-            created: 1683044701,
-            total_paid: 65.1
-        },
-        {
-            id: 1,
-            stripe_tx_id: "pi_3N3M0fHU908PN1EP1i7XjXIn",
-            user_name: "bobby keel",
-            product_type: "membership",
-            product_name: "regular member 2 year - $170",
-            created: 1683044701,
-            total_paid: 120.1
-        },
-        {
-            id: 2,
-            stripe_tx_id: "pi_3N3M0fHU908PN1EP1i7XjXIn",
-            user_name: "penelope forester",
-            product_type: "membership",
-            product_name: "regular member 1 year - $170",
-            created: 1687137163,
-            total_paid: 130.1
-        },
-        {
-            id: 3,
-            stripe_tx_id: "pi_3N3M0fHU908PN1EP1i7XjXIn",
-            user_name: "amy jerry",
-            product_type: "event",
-            product_name: "met gala",
-            created: 1700374352,
-            total_paid: 89.1
-        },
-        {
-            id: 4,
-            stripe_tx_id: "pi_3N3M0fHU908PN1EP1i7XjXIn",
-            user_name: "jerry porter",
-            product_type: "membership",
-            product_name: "regular member 2 year - $170",
-            created: 1683044701,
-            total_paid: 65.1
-        }
-    ]
+
 
     const header = renderHeader();
-
+    useEffect(() => {
+        if (tableTitle === "Transactions") {
+            setColumns([
+                { field: 'stripe_tx_id', header: "ID", sortable: "sortable" },
+                { field: 'created', header: "Date", sortable: "sortable", body: formatDate },
+                { field: 'display_name', header: "Name", sortable: "sortable" },
+                { field: 'product_type', header: "Type", sortable: "sortable" },
+                { field: 'product_name', header: "Product", sortable: "sortable" },
+                { field: 'total_paid', header: "Total", sortable: "sortable", body: totalPaidBodyTemplate },
+            ]);
+        }
+        if (tableTitle === "Members") {
+            setColumns([
+                { field: 'display_name', header: "Name", sortable: "sortable" },
+                { field: 'email', header: "Email", sortable: "sortable" },
+                { field: 'membership', header: "Product", sortable: "sortable" },
+                { field: 'membership_exp', header: "Expires", sortable: "sortable" },
+                { field: 'created', header: "Member Since", sortable: "sortable" },
+            ]);
+        }
+        if (tableTitle === "Events") {
+            setColumns([
+                { field: 'event_name', header: "Name", sortable: "sortable" },
+                { field: 'location', header: "Location", sortable: "sortable" },
+                { field: 'price', header: "Price", sortable: "sortable", body: priceBodyTemplate },
+                { field: 'total_sales', header: "Total Sales", sortable: "sortable", body: totalSalesBodyTemplate },
+                { field: 'created', header: "Created", sortable: "sortable" },
+                { field: 'event_date', header: "Event Date", sortable: "sortable" },
+                { field: 'expired', header: "Completed", sortable: "sortable" },
+            ]);
+        }
+    }, [])
     return (
         <div>
-            <DataTable value={data} globalFilterFields={['stripe_tx_id', 'user_name', 'product_type', 'product_name']} stripedRows paginator rows={5} rowsPerPageOptions={[5, 10, 25, 30]} paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink" currentPageReportTemplate="{first} to {last} of {totalRecords}" sortMode="multiple" removableSort header={header} filters={filters} filterDisplay="row" emptyMessage="No results found.">
-                <Column field='stripe_tx_id' header="ID" sortable />
-                <Column field='created' header="Date" body={formatDate} sortable />
-                <Column field='user_name' header="Name" sortable />
-                <Column field='product_type' header="Type" sortable />
-                <Column field='product_name' header="Product" sortable />
-                <Column field='total_paid' header="Total" body={priceBodyTemplate} sortable />
+            <DataTable className='minor-shadow rounded' value={data} globalFilterFields={['stripe_tx_id', 'display_name', 'product_type', 'product_name', 'email', 'membership', 'event_name', 'location']} stripedRows paginator rows={5} rowsPerPageOptions={[5, 10, 25, 30]} paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink" currentPageReportTemplate="{first} to {last} of {totalRecords}" sortMode="multiple" removableSort header={header} filters={filters} filterDisplay="row" emptyMessage="No results found.">
+                {columns?.map((col) => (
+                    <Column key={col.field} field={col.field} header={col.header} sortable={col.sortable} body={col.body} />
+                ))}
             </DataTable>
         </div>
     )
