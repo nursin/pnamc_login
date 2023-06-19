@@ -121,7 +121,7 @@ function MembershipPayment() {
         .doc()
         .set({
           auth_uid: user.uid,
-          user_name: user.display_name,
+          display_name: user.display_name,
           stripe_tx_id: paymentIntent.id,
           stripe_timestamp: paymentIntent.created,
           product_type: "membership",
@@ -162,7 +162,7 @@ function MembershipPayment() {
         .doc()
         .set({
           auth_uid: user.uid,
-          user_name: user.display_name,
+          display_name: user.display_name,
           stripe_tx_id: paymentIntent.id,
           stripe_timestamp: paymentIntent.created,
           product_type: "membership",

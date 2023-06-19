@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Col, Container, Row } from 'reactstrap'
 import FilterTable from '../components/FilterTable'
 import Tablet from '../components/Tablet'
+import { db } from '../firebase';
 
 function Admin() {
-    const transactions = [
+    const [transactions, setTransactions] = useState();
+    const [members, setMembers] = useState();
+
+    const transaction = [
         {
             id: 1,
             stripe_tx_id: "pi_3N3M0fHU908PN1EP1i7XjXIn",
@@ -114,7 +118,7 @@ function Admin() {
             total_paid: 65.1
         }
     ]
-    const members = [
+    const member = [
         {
             display_name: "bobby keel",
             email: "bobbykeel76@gmail.com",
@@ -203,10 +207,31 @@ function Admin() {
             expired: false,
         },
     ]
+    useEffect(() => {
+        db
+            .collection('users-transactions')
+            .orderBy('created', 'desc')
+            .onSnapshot(snapshot => {
+                setTransactions(snapshot.docs.map(doc => ({
+                    id: doc.id,
+                    transaction: doc.data()
+                })));
+            })
 
+        db
+            .collection('users')
+            .onSnapshot(snapshot => {
+                setMembers(snapshot.docs.map(doc => ({
+                    id: doc.id,
+                    member: doc.data()
+                })));
+            })
+    }, [])
+
+    console.log(transactions)
     return (
         <Container className='admin'>
-            <Row className='d-flex justify-content-between mx-0 mt-2'>
+            <Row className='d-flex justify-content-between mx-0 mt-3'>
                 <Tablet title="Total Sales $" subtitle="$134,000" />
                 <Tablet title="Total Sales #" subtitle="134" />
                 <Tablet title="Membership Sales" subtitle="$19,400" />
@@ -215,16 +240,16 @@ function Admin() {
             <Row className='d-flex justify-content-between mx-0 my-md-2'>
                 <Tablet title="Event Sales" subtitle="$13,400" />
                 <Tablet title="Donation Sales" subtitle="$7,000" />
-                <Tablet title="Event Cost" subtitle="$4,000" color="red"/>
+                <Tablet title="Event Cost" subtitle="$4,000" color="red" />
                 <Tablet title="Processing Fee" subtitle="$500" />
             </Row>
             <Row className='d-flex justify-content-between mx-0 mb-2'>
                 <Tablet title="Total Members" subtitle="130" />
-                <Tablet title="Unpaid Members" subtitle="13" color="red"/>
+                <Tablet title="Unpaid Members" subtitle="13" color="red" />
                 <Tablet title="Membership Types" subtitle="$134,000" />
                 <Tablet title="Visitor Stats" subtitle="$134,000" />
             </Row>
-            <Row className='mb-3'>
+            <Row className='my-3'>
                 <Col>
                     <FilterTable data={transactions} tableTitle="Transactions" />
                 </Col>
