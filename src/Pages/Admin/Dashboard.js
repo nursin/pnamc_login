@@ -6,60 +6,7 @@ import { db } from '../../firebase';
 
 function Dashboard() {
     const [transactions, setTransactions] = useState();
-    const [members, setMembers] = useState();
 
-    const events = [
-        {
-            event_name: "met gala",
-            location: "CCBX Essex",
-            price: 100.0,
-            total_num: 12,
-            total_sales: 1200,
-            created: 1683044701,
-            event_date: 27850643011,
-            expired: false,
-        },
-        {
-            event_name: "honey gala",
-            location: "Checkers Essex",
-            price: 120.0,
-            total_num: 15,
-            total_sales: 1900,
-            created: 1643044701,
-            event_date: 27450643011,
-            expired: true,
-        },
-        {
-            event_name: "carry gala",
-            location: "CCBX Essex",
-            price: 100.0,
-            total_num: 12,
-            total_sales: 1200,
-            created: 1683044701,
-            event_date: 27850643011,
-            expired: false,
-        },
-        {
-            event_name: "jimmy gala",
-            location: "Chillis Essex",
-            price: 100.0,
-            total_num: 12,
-            total_sales: 1200,
-            created: 1683044701,
-            event_date: 27850643011,
-            expired: false,
-        },
-        {
-            event_name: "met gala",
-            location: "CCBX Essex",
-            price: 100.0,
-            total_num: 12,
-            total_sales: 1200,
-            created: 1683044701,
-            event_date: 27850643011,
-            expired: false,
-        },
-    ]
     useEffect(() => {
         db
             .collection('users-transactions')
@@ -68,15 +15,6 @@ function Dashboard() {
                 setTransactions(snapshot.docs.map(doc => ({
                     id: doc.id,
                     transaction: doc.data()
-                })));
-            })
-
-        db
-            .collection('users')
-            .onSnapshot(snapshot => {
-                setMembers(snapshot.docs.map(doc => ({
-                    id: doc.id,
-                    member: doc.data()
                 })));
             })
     }, [])
@@ -104,16 +42,6 @@ function Dashboard() {
             <Row className='my-3'>
                 <Col>
                     <FilterTable data={transactions} tableTitle="Transactions" />
-                </Col>
-            </Row>
-            <Row className='mb-3'>
-                <Col>
-                    <FilterTable data={members} tableTitle="Members" />
-                </Col>
-            </Row>
-            <Row className='mb-3'>
-                <Col>
-                    <FilterTable data={events} tableTitle="Events" />
                 </Col>
             </Row>
         </Container>
