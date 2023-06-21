@@ -604,6 +604,22 @@ footer {
   width: 12rem;
 }
 
+.adminNav {
+  display: flex;
+  flex-direction: column;
+  box-shadow: 1px 0 5px -2px #888;
+}
+
+.adminNav > a {
+  padding: 1rem 1rem 0.5rem 1rem;
+  text-align: center;
+  margin: 0;
+  box-shadow: inset 6px 6px 10px 0 rgba(0, 0, 0, 0.2), inset -6px -6px 10px 0 rgba(255, 255, 255, 0.5);
+}
+
+.adminNav > a:hover {
+  background-color: #d8d8d8;
+}
 
 /* media queries */
 @media screen and (prefers-reduced-motion: no-preference) {

@@ -30,7 +30,17 @@ import ErrorPage from './Pages/ErrorPage';
 
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js';
-import Admin from './Pages/Admin';
+import Dashboard from './Pages/Admin/Dashboard';
+import AdminNav from './Pages/Admin/AdminNav';
+import Transactions from './Pages/Admin/Transactions';
+import Members from './Pages/Admin/Members';
+import AdminEvents from './Pages/Admin/Events';
+import AdminNews from './Pages/Admin/News';
+import Donations from './Pages/Admin/Donations';
+import RecAwards from './Pages/Admin/RecAwards';
+import NewMembers from './Pages/Admin/NewMembers';
+import Website from './Pages/Admin/Website';
+
 const promise = loadStripe('pk_test_51Kcm9tHU908PN1EPN0qUDY57lBBSrsWEDS1Lw4TM22jtTVDcBk8mRLVCbTjFm10r0jfE96VMm4q6coXy8BlF2AQL00fXpkdkwq');
 
 function App() {
@@ -106,7 +116,17 @@ function App() {
               <MembershipPayment />
             </Elements>
           } />
-          <Route path="/admin-$*2334" element={<Admin />} />
+          <Route path="admin-$*2334" element={<AdminNav />}>
+            <Route path="admin-dashboard" element={<Dashboard />} />
+            <Route path="admin-transactions" element={<Transactions />} />
+            <Route path="admin-members" element={<Members />} />
+            <Route path="admin-events" element={<AdminEvents />} />
+            <Route path="admin-news" element={<AdminNews />} />
+            <Route path="admin-donations" element={<Donations />} />
+            <Route path="admin-recognition-awards" element={<RecAwards />} />
+            <Route path="admin-new-members" element={<NewMembers />} />
+            <Route path="admin-website" element={<Website />} />
+          </Route>
           {/* Redirects */}
           {/* <Route path="/community-outreach-events" element={<Committees />} /> */}
           <Route path="*" element={<ErrorPage />} />

@@ -80,7 +80,7 @@ function FilterTable({ data, tableTitle }) {
     useEffect(() => {
         if (tableTitle === "Transactions") {
             setColumns([
-                { field: 'transaction.stripe_tx_id', header: "ID", sortable: "sortable" },
+                { field: 'transaction.stripe_tx_id', header: "Stripe ID", sortable: "sortable" },
                 { field: 'transaction.created', header: "Date", sortable: "sortable", body: formatDate },
                 { field: 'transaction.display_name', header: "Name", sortable: "sortable" },
                 { field: 'transaction.product_type', header: "Type", sortable: "sortable" },
