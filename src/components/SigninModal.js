@@ -72,46 +72,13 @@ function SigninModal() {
                 </ModalHeader>
                 <ModalBody className='d-flex flex-column pt-4'>
                     <img src={pnamc_logo} className="mx-auto" alt="PNAMC Logo" />
-                    <p className='alt-p text-black text-center mt-3 mb-1'>Login/Join by clicking an option</p>
-                    <Input
-                        className='text-center round p-2 mx-auto'
-                        placeholder="Enter email address"
-                        value={email}
-                        onChange={e => setEmail(e.target.value)}
-                    />
                     <Button
-                        className='signin__email mx-auto fw-bold m-2'
-                        onClick={sendSignInLinkToEmail}
-                    >
-                        Continue with email
-                    </Button>
-                    <p className='text-black text-center fw-normal mb-2'>or</p>
-                    <Button
-                        className='signin__googleFormButton mx-auto fw-bold mb-2'
+                        className='signin__googleFormButton mx-auto fw-bold mt-4'
                         onClick={signInWithGoogle}
                     >
                         Continue with Google
                         <FontAwesomeIcon icon={faGoogle} className="fs-5 ms-2" />
                     </Button>
-                    {/* takes user to the create  */}
-                    {/* <p className='text-black text-center mt-4 mb-0'>Dont have an account?</p>
-                    <a href='' className='alt-text text-center mx-auto'>Create an account</a> */}
-                    <hr />
-                    <p className='alt-p text-black text-center mb-0 mt-2'>Other options below</p>
-                    <a
-                        className='alt-text mx-auto'
-                        href={memberApplication}
-                    >
-                        Join/Renew by Mail
-                    </a>
-                    <a
-                        className='alt-text mx-auto'
-                        href='https://mypnaa.org/Membership-Form'
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        Apply at PNAA.org
-                    </a>
                 </ModalBody>
             </Modal>
         </>

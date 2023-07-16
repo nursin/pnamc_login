@@ -5,13 +5,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import firebase from 'firebase';
 import ModifyModal from './ModifyModal';
+import EditImageSliderModal from './EditImageSliderModal';
+import EditMemberImageSliderModal from './EditMemberImageSliderModal';
+import DeleteMemberModal from './DeleteMemberModal';
+
 
 function ImageSlider() {
     const [title, setTitle] = useState('');
     const [text, setText] = useState('');
-    const [mouseOver, setMouseOver] = useState(false);
+    const [sectionHeader, setSectionHeader] = useState('');
 
-    
     const [newMembers, setNewMembers] = useState([]);
     const [imageFile, setImageFile] = useState('');
     const [progress, setProgress] = useState(0);
@@ -22,6 +25,8 @@ function ImageSlider() {
 
     // redux
     const { user } = useSelector((state) => state.user);
+
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -36,17 +41,27 @@ function ImageSlider() {
                     newMember: doc.data()
                 })));
             })
-    }, []);
 
-    // console.log("memberList", newMembers)
+        db
+            .collection("sections")
+            .doc('GJzhEiT4Vocr5UxfHaQh')
+            .onSnapshot((doc) => {
+                setSectionHeader(doc.data().header)
+            })
+    }, []);
 
     return (
         <div className='imageSlider__container pt-4'>
-            
-            <h1 className='text-black text-center'><ModifyModal className='me-3 mb-1 py-1 px-3 round fs-3'>+</ModifyModal>Welcome New Members</h1>
+
+            <h1 className='text-black text-center'><EditImageSliderModal sectionHeader={sectionHeader} />{sectionHeader}</h1>
             <div className='imageSlider mt-2'>
-                {newMembers.map(({ newMember: { title, text, image, image_alt_text } }) => (
-                    <Card className='imageSlider__card'>
+                <div>
+                    <ModifyModal />
+                </div>
+                {newMembers.map(({ id, newMember: { title, text, image, image_alt_text } }) => (
+                    <Card key={id} className='imageSlider__card position-relative'>
+                        <DeleteMemberModal id={id} />
+                        <EditMemberImageSliderModal id={id} title={title} image={image} text={text} />
                         <img
                             alt={image_alt_text}
                             src={image}

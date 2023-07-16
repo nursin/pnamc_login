@@ -9,10 +9,7 @@ function ModifyModal() {
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
     const [title, setTitle] = useState('');
     const [text, setText] = useState('');
-    const [mouseOver, setMouseOver] = useState(false);
 
-
-    const [newMembers, setNewMembers] = useState([]);
     const [imageFile, setImageFile] = useState('');
     const [progress, setProgress] = useState(0);
 
@@ -81,7 +78,7 @@ function ModifyModal() {
 
     return (
         <>
-            <Button outline className='me-3 mb-1 py-1 px-3 round fs-3 fw-bold'
+            <Button outline className='me-3 mb-1 py-1 px-3 round fs-3 fw-bold my-auto'
                 onClick={() => setIsLoginModalOpen(isLoginModalOpen ? false : true)}
             >+</Button>
 

@@ -30,6 +30,7 @@ function Home() {
     const { user } = useSelector((state) => state.user);
     const dispatch = useDispatch();
     const [userInfo, setUserInfo] = useState('');
+    const [sections, setSections] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -44,15 +45,6 @@ function Home() {
                 })));
             })
     }, [user]);
-
-    useEffect(() => {
-        if (userInfo[0]?.user.has_app_on_file === false) {
-            navigate('/create-account')
-        } else if (userInfo[0]?.user.has_paid_membership === false) {
-            navigate('/membership-payment')
-        }
-    }, [userInfo])
-
 
     return (
         <div className='home'>

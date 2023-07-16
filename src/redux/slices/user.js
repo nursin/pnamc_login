@@ -25,23 +25,42 @@ export const setUserOrCreateAndSet = createAsyncThunk(
     }
 )
 
+export const getSectionHeader = createAsyncThunk(
+    "user/getSectionHeader",
+    async () => {
+        try {
+            db
+            .collection("sections")
+            .doc('GJzhEiT4Vocr5UxfHaQh')
+            .onSnapshot((doc) => {
+                setSectionHeader(doc.data().header)
+            })
+        } catch (err) {
+            console.log(err)
+        }
+    }
+)
+
 // change the state based on the called function
 export const userSlice = createSlice({
     name: 'user',
     initialState: {
         user: null,
-        userContacts: null,
+        sectionHeader: null,
         status: null,
     },
     reducers: {
         setUser: (state, action) => {
             state.user = action.payload;
         },
+        setSectionHeader: (state, action) => {
+            state.sectionHeader = action.payload
+        },
     },
 
 })
 
 //action creators are generated for each case reducer function
-export const { setUser } = userSlice.actions;
+export const { setUser, setSectionHeader } = userSlice.actions;
 
 export default userSlice.reducer;
