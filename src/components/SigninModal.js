@@ -3,7 +3,7 @@ import { Button, Input, Modal, ModalBody, ModalHeader, Tooltip } from 'reactstra
 import pnamc_logo from '../PNAMC_chapter_logo_transparent.png';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
-import { auth, googleAuthProvider, actionCodeSettings } from '../firebase';
+import { auth, googleAuthProvider, actionCodeSettings, db } from '../firebase';
 import firebase from 'firebase';
 import no_image from "../empty_profile.jpeg"
 
@@ -12,12 +12,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setUser, setUserOrCreateAndSet } from '../redux/slices/user';
 import { useNavigate } from 'react-router-dom';
 
+
 const memberApplication = "https://firebasestorage.googleapis.com/v0/b/pnamc-eb0c4.appspot.com/o/PNAMCMembershipApplicationForm.doc?alt=media&token=f54bb1ad-0b8f-4e7f-a90a-1456e68389f8"
 
 function SigninModal() {
     const [isSigninModalOpen, setIsSigninModalOpen] = useState(false);
     const [email, setEmail] = useState('');
     const navigate = useNavigate();
+
+    const { user } = useSelector((state) => state.user);
 
     const [tooltipOpen, setTooltipOpen] = useState(false);
     const toggle = () => setTooltipOpen(!tooltipOpen);

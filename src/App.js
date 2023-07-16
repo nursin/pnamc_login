@@ -23,13 +23,8 @@ import { auth, db } from './firebase';
 // redux shit
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from './redux/slices/user';
-import Account from './Pages/Account';
-import CreateAccount from './Pages/CreateAccount';
-import MembershipPayment from './Pages/MembershipPayment';
 import ErrorPage from './Pages/ErrorPage';
 
-import { loadStripe } from '@stripe/stripe-js'
-import { Elements } from '@stripe/react-stripe-js';
 import Dashboard from './Pages/Admin/Dashboard';
 import AdminNav from './Pages/Admin/AdminNav';
 import Transactions from './Pages/Admin/Transactions';
@@ -41,8 +36,6 @@ import RecAwards from './Pages/Admin/RecAwards';
 import NewMembers from './Pages/Admin/NewMembers';
 import Website from './Pages/Admin/Website';
 
-const promise = loadStripe('pk_test_51Kcm9tHU908PN1EPN0qUDY57lBBSrsWEDS1Lw4TM22jtTVDcBk8mRLVCbTjFm10r0jfE96VMm4q6coXy8BlF2AQL00fXpkdkwq');
-
 function App() {
   // redux shit
   const { user } = useSelector((state) => state.user);
@@ -51,8 +44,11 @@ function App() {
   useEffect(() => {
     const getUserAuth = () => {
       auth.onAuthStateChanged(async (user) => {
-        if (user) {
+        if (user.uid === "pcFOR7WMq9gvRecGgYxet3HpVXs2") {
           dispatch(setUser(user))
+        } else {
+          auth.signOut()
+          alert("You do not have access to this feature")
         }
       })
     }
@@ -109,13 +105,6 @@ function App() {
           <Route path="/events" element={<Events />} />
           <Route path="/membership" element={<Membership />} />
           <Route path="/donate" element={<Donate />} />
-          <Route path="/account" element={<Account />} />
-          <Route path="/create-account" element={<CreateAccount />} />
-          <Route path="/membership-payment" element={
-            <Elements stripe={promise}>
-              <MembershipPayment />
-            </Elements>
-          } />
           <Route path="admin-$*2334" element={<AdminNav />}>
             <Route path="admin-dashboard" element={<Dashboard />} />
             <Route path="admin-transactions" element={<Transactions />} />

@@ -37,7 +37,7 @@ function ProfileAvatar() {
                                     <img src={user?.photoURL} alt="Profile Pic" className="profileAvatar" />
                                 </div>
                                 <div className="dropdown-content">
-                                    <Link to="/account">Account</Link>
+                                    <Link to="/admin-$*2334">Admin Page</Link>
                                     {user ? <a href='/' onClick={signOut}>Sign out</a> : <a href="/">Sign in</a>}
                                 </div>
                             </div>
@@ -49,7 +49,7 @@ function ProfileAvatar() {
                                     <p className='profileAvatar-noImage text-white fs-6'>{user?.email?.slice(0, 1).toUpperCase()}</p>
                                 </div>
                                 <div className="dropdown-content">
-                                    <Link to="/account">Account</Link>
+                                    <Link to="/admin-$*2334">Admin Page</Link>
                                     {user ? <a href='/' onClick={signOut}>Sign out</a> : <a href="/">Sign in</a>}
                                 </div>
                             </div>
