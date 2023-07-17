@@ -115,9 +115,10 @@ function EditMemberImageSliderModal(props) {
                 <ModalHeader toggle={() => setIsLoginModalOpen(false)}>
                     <p className='text-secondary m-0'><strong>Edit New Member</strong></p>
                 </ModalHeader>
-                <ModalBody className='d-flex flex-column pt-4'>
+                <ModalBody className='d-flex flex-column'>
                     <Form onSubmit={handleEditNewMemberDisplay}>
                         <Row>
+                            <p className='text-danger mb-2'>Only make changes to fields that need changed. For example, you dont have to upload an image file if you are only changing member name.</p>
                             <FormGroup floating>
                                 <Input
                                     id="imageUpload"
@@ -147,7 +148,7 @@ function EditMemberImageSliderModal(props) {
                                     placeholder="Enter member name"
                                     value={title}
                                     onChange={e => setTitle(e.target.value)}
-                                    required
+                                    type="text"
                                 />
                                 <Label for="title">
                                     Member Name
@@ -159,6 +160,8 @@ function EditMemberImageSliderModal(props) {
                                     placeholder="Enter text"
                                     value={text}
                                     onChange={e => setText(e.target.value)}
+                                    type="textarea"
+                                    style={{height: '150px'}}
                                 />
                                 <Label for="text">
                                     Text
